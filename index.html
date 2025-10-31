@@ -93,27 +93,138 @@
             transform: rotate(180deg);
         }
 
-        /* --- NOVOS ESTILOS DA CALCULADORA --- */
-        .calc-btn {
-            @apply p-3 rounded-lg text-white font-semibold text-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500;
+        /* --- ESTILOS DA CALCULADORA ANTIGA (REMOVIDOS) --- */
+        /* .calc-btn, .calc-btn-num, .calc-btn-op, .calc-btn-action, .calc-btn-eq ... REMOVIDOS */
+
+        /* --- NOVOS ESTILOS DA CALCULADORA (ADAPTADOS PARA O TEMA ESCURO) --- */
+        .calculadora-container {
+            width: 100%;
+            max-width: 600px; /* Mantido do seu código */
+            margin: 0 auto; /* Centraliza a nova calculadora */
+            background-color: transparent; /* Adaptado */
+            border-radius: 10px;
+            overflow: hidden;
         }
-        /* Botões de números e 'x' */
-        .calc-btn-num {
-            @apply bg-gray-700 hover:bg-slate-700;
+
+        /* O header foi removido, pois já estamos numa aba */
+        
+        .nav-botoes {
+            display: flex;
+            justify-content: space-around;
+            background-color: #1F2937; /* bg-gray-800 - Adaptado */
+            border-bottom: 1px solid #4B5563; /* border-gray-600 - Adaptado */
+            border-radius: 8px 8px 0 0; /* Arredonda o topo */
         }
-        /* Botões de operadores (+, -, *, /) e funções (sin, diff) */
-        .calc-btn-op {
-            @apply bg-gray-600 hover:bg-slate-600;
+
+        .nav-botoes button {
+            flex-grow: 1;
+            padding: 15px 10px;
+            font-size: 0.9em;
+            font-weight: 600;
+            border: none;
+            background-color: transparent;
+            color: #D1D5DB; /* text-gray-300 - Adaptado */
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            border-bottom: 3px solid transparent;
         }
-        /* Botões de ação (C, <-) */
-        .calc-btn-action {
-            @apply bg-slate-800 hover:bg-slate-700;
+
+        .nav-botoes button:hover {
+            background-color: #374151; /* bg-gray-700 - Adaptado */
         }
-        /* Botão de igual (=) */
-        .calc-btn-eq {
-            @apply bg-slate-600 hover:bg-slate-500 col-span-2;
+
+        .nav-botoes button.active {
+            color: #FBBF24; /* text-yellow-400 - Adaptado */
+            border-bottom: 3px solid #FBBF24; /* border-yellow-400 - Adaptado */
         }
-        /* --- FIM DOS ESTILOS DA CALCULADORA --- */
+
+        /* Os 4 "Campos" (Seções) */
+        .calc-secao {
+            padding: 25px;
+            display: none; /* Todas começam escondidas */
+            background-color: #1F2937; /* bg-gray-800 - Adaptado */
+            border-radius: 0 0 8px 8px; /* Arredonda a base */
+            border: 1px solid #4B5563; /* border-gray-600 - Adaptado */
+            border-top: none; /* A borda de cima é do nav */
+        }
+
+        .calc-secao.active {
+            display: block; /* A seção ativa é mostrada */
+        }
+
+        .calc-secao h2 {
+            font-size: 1.5em; /* 2xl */
+            font-weight: 700; /* bold */
+            color: #F9FAFB; /* text-gray-50 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+        .form-grupo {
+            margin-bottom: 20px;
+        }
+
+        .form-grupo label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #D1D5DB; /* text-gray-300 - Adaptado */
+        }
+
+        .form-grupo input[type="text"] {
+            width: 100%; /* Simplificado */
+            padding: 10px;
+            border: 1px solid #4B5563; /* border-gray-600 - Adaptado */
+            background-color: #374151; /* bg-gray-700 - Adaptado */
+            color: #F9FAFB; /* text-gray-50 - Adaptado */
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+        }
+        
+        .form-grupo input[type="text"]:focus {
+            outline: none;
+            border-color: #60A5FA; /* blue-400 - Adaptado */
+            box-shadow: 0 0 5px rgba(96,165,250,0.3); /* Adaptado */
+        }
+
+        .btn-calcular {
+            background-color: #4B5563; /* bg-gray-600 - Adaptado */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-calcular:hover {
+            background-color: #334155; /* bg-slate-700 - Adaptado */
+        }
+
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #111827; /* bg-gray-900 - Adaptado */
+            border: 1px solid #374151; /* border-gray-700 - Adaptado */
+            color: #34D399; /* text-green-400 - Adaptado */
+            border-radius: 5px;
+            min-height: 50px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1.1em;
+            overflow-x: auto; /* Adicionado para resultados longos */
+        }
+        
+        .resultado pre {
+            margin: 0;
+            white-space: pre-wrap; /* Quebra de linha */
+            word-wrap: break-word; /* Quebra de palavra */
+        }
+
+        .resultado.erro {
+            color: #F87171; /* text-red-400 - Adaptado */
+        }
 
     </style>
 </head>
@@ -131,27 +242,28 @@
             </p>
         </div>
 
+        <!-- === INÍCIO DO HTML RESTAURADO === -->
+
         <!-- Card principal da apresentação -->
         <div class="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
             
             <!-- Navegação por Abas (Estilo Pílula) -->
             <div class="flex flex-wrap border-b border-gray-700 bg-gray-800 p-3 justify-center gap-2">
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="historia">
-                    História
+                    🏛️ História
                 </button>
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="funcao">
-                    Função
+                    ƒ(x) Função
                 </button>
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="limites">
-                    Limites
+                    → Limites
                 </button>
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="derivadas">
-                    Derivadas
+                    ∆ Derivadas
                 </button>
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="integrais">
-                    Integrais
+                    ∫ Integrais
                 </button>
-                <!-- NOVA ABA DA CALCULADORA -->
                 <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="calculadora">
                     🧮 Calculadora
                 </button>
@@ -163,24 +275,23 @@
                 <!-- Aba: História -->
                 <div id="historia-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
-                    
-                    <!-- Frase adicionada -->
-                    <p class="text-base md:text-lg text-gray-300 mb-6 italic">
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         Este trabalho tem como objetivo apresentar a origem, a função e as curiosidades que cercam esse monumento único.
                     </p>
-
-                    <!-- Parágrafo movido para cima -->
+                    <p class="text-base md:text-lg text-gray-300 mb-8 leading-relaxed">
+                        O Anfiteatro Flaviano, conhecido mundialmente como Coliseu, é um dos monumentos mais emblemáticos da Roma Antiga. Iniciado pelo imperador Vespasiano por volta de 70-72 d.C. e concluído por seu filho Tito em 80 d.C., ele foi palco de espetáculos públicos, incluindo combates de gladiadores, caças de animais selvagens e execuções.
+                    </p>
                     <p class="text-base md:text-lg text-gray-300 mb-8 leading-relaxed">
                         Sua arquitetura elíptica era uma inovação, permitindo que até 50.000 espectadores tivessem uma visão clara da arena. Os engenheiros romanos utilizaram arcos e abóbadas de forma magistral para sustentar a imensa estrutura.
                     </p>
                     
-                    <!-- Div expansível 1 -->
+                    <!-- Divs Expansíveis (HTML <details>) -->
                     <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
                         <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
                             🏛️ Origem e Construção do Coliseu
                         </summary>
                         <div class="p-4 border-t border-gray-600">
-                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300 leading-relaxed">
                                 <li><strong>Construção:</strong> entre 70–80 d.C., sob os imperadores da dinastia Flaviana (Vespasiano e Tito).</li>
                                 <li><strong>Localização:</strong> erguido no espaço antes ocupado por um lago artificial da Domus Aurea de Nero.</li>
                                 <li><strong>Propósito:</strong> servir como espaço público para jogos, espetáculos e também como ferramenta de propaganda política.</li>
@@ -190,33 +301,27 @@
                         </div>
                     </details>
 
-                    <!-- Div expansível 2 (ATUALIZADA) -->
                     <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
                         <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
                             🧱 Estrutura e Inovações Arquitetônicas
                         </summary>
-                        <div class="p-4 border-t border-gray-600 space-y-4">
-                            
-                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                        <div class="p-4 border-t border-gray-600">
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300 leading-relaxed">
                                 <li><strong>Capacidade:</strong> entre 50 e 80 mil espectadores.</li>
                                 <li><strong>Sistema de acessos:</strong> corredores e entradas numeradas permitiam encher ou esvaziar o estádio em cerca de 15 minutos.</li>
                                 <li><strong>Velário:</strong> enorme toldo retrátil sustentado por 240 mastros, manuseado por marinheiros, para proteger o público do sol.</li>
                                 <li><strong>Rede de água:</strong> mais de 100 fontes e banheiros públicos, conectados ao Cloaca Máxima (sistema de esgoto romano).</li>
                                 <li><strong>Hipogeu:</strong> estrutura subterrânea com túneis, elevadores, rampas e portas ocultas para introduzir gladiadores, animais e cenários de surpresa.</li>
                             </ul>
-                            
-                            <!-- <h4 class="text-lg font-semibold text-gray-200 pt-2">Espetáculos no Coliseu</h4> -> REMOVIDO DAQUI -->
-                            <!-- <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300 pl-4"> ... </ul> -> REMOVIDO DAQUI -->
                         </div>
                     </details>
 
-                    <!-- Div expansível 3 (NOVA - ESPETÁCULOS) -->
                     <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
                         <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
                             ⚔️ Espetáculos no Coliseu
                         </summary>
                         <div class="p-4 border-t border-gray-600">
-                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                            <ul class="list-disc list-inside space-y-3 text-base md:text-lg text-gray-300 leading-relaxed">
                                 <li>
                                     <strong>Lutas de Gladiadores:</strong> Principal atração. Tinham papel social e político, reforçando o poder imperial.
                                 </li>
@@ -230,13 +335,12 @@
                         </div>
                     </details>
 
-                    <!-- Div expansível 4 (ERA A 3 - HISTÓRIA) -->
                     <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
                         <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
                             ⏳ O Coliseu ao Longo da História
                         </summary>
                         <div class="p-4 border-t border-gray-600">
-                             <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300 leading-relaxed">
                                 <li>Sofreu grandes danos com os terremotos de 847 e 1231, além de saques de materiais.</li>
                                 <li>Na Idade Média, foi adaptado para diferentes funções (fortaleza, moradia, oficinas).</li>
                                 <li>Na Renascença, passou a ser valorizado como símbolo da Roma Antiga.</li>
@@ -246,24 +350,8 @@
                             </ul>
                         </div>
                     </details>
-                    <!-- FIM DAS NOVAS DIVS -->
-                    
-                    <!-- Botões Interativos (Estilo Pílula) - REMOVIDOS
-                    <div class="flex flex-wrap gap-4 mt-8">
-                        <button id="img-btn" class="bg-slate-600 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
-                            <span role="img" aria-label="Imagens">🖼️</span>
-                            Ver Imagens
-                        </button>
-                        <button id="vid-btn" class="bg-gray-700 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
-                            <span role="img" aria-label="Vídeos">🎥</span>
-                            Vídeos
-                        </button>
-                        <button id="cur-btn" class="bg-gray-700 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
-                            <span role="img" aria-label="Curiosidades">💡</span>
-                            Curiosidades
-                        </button>
-                    </div>
-                    -->
+
+                    <!-- Botões Removidos -->
                 </div>
 
                 <!-- Aba: Função -->
@@ -423,194 +511,214 @@
 
                 <!-- Aba: Calculadora -->
                 <div id="calculadora-content" class="tab-content">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-6">Calculadora de Cálculo</h2>
                     
-                    <div class="space-y-4 max-w-md mx-auto">
-                        <!-- Visor (Input Field) -->
-                        <div>
-                            <label for="calc-input" class="block text-sm font-medium text-gray-300 mb-2">Expressão:</label>
-                            <input type="text" id="calc-input" class="w-full p-3 bg-gray-800 border border-gray-600 text-gray-100 rounded-lg focus:ring-2 focus:ring-slate-500 focus:outline-none text-right text-2xl" placeholder="0">
-                            <p class="text-xs text-gray-400 mt-1">Use os botões ou digite. Ex: <code>diff(x^3, x)</code></p>
-                        </div>
+                    <!-- NOVO CONTEÚDO DA CALCULADORA (SEU HTML ADAPTADO) -->
+                    <div class="calculadora-container">
+                        <!-- O header <header> foi removido pois já estamos na aba "Calculadora" -->
 
-                        <!-- Teclado da Calculadora -->
-                        <div id="calc-keypad" class="grid grid-cols-5 gap-2 mt-4">
-                            <!-- Linha 1 -->
-                            <button class="calc-btn calc-btn-op" data-value="diff(">diff(</button>
-                            <button class="calc-btn calc-btn-op" data-value="integrate(">int(</button>
-                            <button class="calc-btn calc-btn-op" data-value="solve(">solve(</button>
-                            <button class="calc-btn calc-btn-op" data-value="^">^</button>
-                            <button id="calc-clear" class="calc-btn calc-btn-action">C</button>
-                            
-                            <!-- Linha 2 -->
-                            <button class="calc-btn calc-btn-op" data-value="sin(">sin(</button>
-                            <button class="calc-btn calc-btn-op" data-value="cos(">cos(</button>
-                            <button class="calc-btn calc-btn-op" data-value="tan(">tan(</button>
-                            <button class="calc-btn calc-btn-op" data-value="(">(</button>
-                            <button class="calc-btn calc-btn-op" data-value=")">)</button>
+                        <nav class="nav-botoes">
+                            <button class="nav-btn active" data-target="funcoes">Funções</button>
+                            <button class="nav-btn" data-target="limites">Limites</button>
+                            <button class="nav-btn" data-target="derivadas">Derivadas</button>
+                            <button class="nav-btn" data-target="integrais">Integrais</button>
+                        </nav>
 
-                            <!-- Linha 3 -->
-                            <button class="calc-btn calc-btn-num" data-value="7">7</button>
-                            <button class="calc-btn calc-btn-num" data-value="8">8</button>
-                            <button class="calc-btn calc-btn-num" data-value="9">9</button>
-                            <button class="calc-btn calc-btn-op" data-value="/">/</button>
-                            <button id="calc-backspace" class="calc-btn calc-btn-action">←</button>
-                            
-                            <!-- Linha 4 -->
-                            <button class="calc-btn calc-btn-num" data-value="4">4</button>
-                            <button class="calc-btn calc-btn-num" data-value="5">5</button>
-                            <button class="calc-btn calc-btn-num" data-value="6">6</button>
-                            <button class="calc-btn calc-btn-op" data-value="*">*</button>
-                            <button class="calc-btn calc-btn-num" data-value="x">x</button>
+                        <main>
+                            <section id="funcoes" class="calc-secao active">
+                                <h2>Análise de Funções (Resolver/Simplificar)</h2>
+                                <div class="form-grupo">
+                                    <label for="input-funcao">Função f(x) ou Equação (use 'x'):</label>
+                                    <input type="text" id="input-funcao" placeholder="Ex: x^2 + 2*x - 1 = 0 (para raízes) ou (x^2-1)/(x-1) (para simplificar)">
+                                </div>
+                                <!-- Botão agora tem ID para o JS -->
+                                <button id="btn-calc-funcao" class="btn-calcular">Analisar</button>
+                                <div class="resultado">
+                                    <pre id="resultado-funcoes">O resultado (raízes ou simplificação) aparecerá aqui.</pre>
+                                </div>
+                            </section>
 
-                            <!-- Linha 5 -->
-                            <button class="calc-btn calc-btn-num" data-value="1">1</button>
-                            <button class="calc-btn calc-btn-num" data-value="2">2</button>
-                            <button class="calc-btn calc-btn-num" data-value="3">3</button>
-                            <button class="calc-btn calc-btn-op" data-value="-">-</button>
-                            <button id="calc-solve" class="calc-btn calc-btn-eq" data-value="=">=</button>
+                            <section id="limites" class="calc-secao">
+                                <h2>Cálculo de Limites</h2>
+                                <div class="form-grupo">
+                                    <label for="input-limite-funcao">Função f(x):</label>
+                                    <input type="text" id="input-limite-funcao" placeholder="Ex: (x^2 - 1) / (x - 1)">
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="input-limite-ponto">x tende a:</label>
+                                    <input type="text" id="input-limite-ponto" placeholder="Ex: 1">
+                                </div>
+                                <!-- Botão agora tem ID para o JS -->
+                                <button id="btn-calc-limite" class="btn-calcular">Calcular Limite</button>
+                                <div class="resultado">
+                                    <pre id="resultado-limites">O resultado do limite aparecerá aqui.</pre>
+                                </div>
+                            </section>
 
-                            <!-- Linha 6 -->
-                            <button class="calc-btn calc-btn-num col-span-2" data-value="0">0</button>
-                            <button class="calc-btn calc-btn-num" data-value=".">.</button>
-                            <button class="calc-btn calc-btn-op" data-value="+">+</button>
-                            <button class="calc-btn calc-btn-op" data-value=",">,</button>
-                        </div>
+                            <section id="derivadas" class="calc-secao">
+                                <h2>Cálculo de Derivadas</h2>
+                                <div class="form-grupo">
+                                    <label for="input-derivada-funcao">Função f(x):</label>
+                                    <input type="text" id="input-derivada-funcao" placeholder="Ex: x^3 + sin(x)">
+                                </div>
+                                <!-- Botão agora tem ID para o JS -->
+                                <button id="btn-calc-derivada" class="btn-calcular">Calcular Derivada (f'(x))</button>
+                                <div class="resultado">
+                                    <pre id="resultado-derivadas">A derivada f'(x) aparecerá aqui.</pre>
+                                </div>
+                            </section>
 
-                        <!-- Resultado -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Resultado:</h3>
-                            <pre id="calc-result" class="bg-gray-800 p-4 rounded-lg text-lg text-green-400 border border-gray-700 min-h-[50px] overflow-x-auto"></pre>
-                        </div>
+                            <section id="integrais" class="calc-secao">
+                                <h2>Cálculo de Integrais (Indefinidas)</h2>
+                                <div class="form-grupo">
+                                    <label for="input-integral-funcao">Função f(x):</label>
+                                    <input type="text" id="input-integral-funcao" placeholder="Ex: 3*x^2">
+                                </div>
+                                <!-- Botão agora tem ID para o JS -->
+                                <button id="btn-calc-integral" class="btn-calcular">Calcular Integral (∫f(x)dx)</button>
+                                <div class="resultado">
+                                    <pre id="resultado-integrais">A integral indefinida aparecerá aqui. (Lembre-se de adicionar +C)</pre>
+                                </div>
+                            </section>
+                        </main>
                     </div>
+                    <!-- FIM DO NOVO CONTEÚDO DA CALCULADORA -->
+
                 </div>
 
             </div>
         </div>
 
         <!-- Rodapé com Participantes -->
-        <footer class="mt-12 py-8 border-t border-gray-700">
-            <h3 class="text-center text-xl font-semibold text-gray-300 mb-6">Participantes</h3>
+        <footer class="mt-12 text-center">
+            <p class="text-gray-400 mb-4">Desenvolvido por:</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
-                    Rodrigo
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
-                    Pedro
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
-                    Lucas
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
-                    Marcio
-                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="p-3 px-5 text-sm md:text-base text-gray-300 bg-gray-800 hover:bg-slate-700 rounded-full transition-all duration-300 shadow-md">Rodrigo</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="p-3 px-5 text-sm md:text-base text-gray-300 bg-gray-800 hover:bg-slate-700 rounded-full transition-all duration-300 shadow-md">Pedro</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="p-3 px-5 text-sm md:text-base text-gray-300 bg-gray-800 hover:bg-slate-700 rounded-full transition-all duration-300 shadow-md">Lucas</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="p-3 px-5 text-sm md:text-base text-gray-300 bg-gray-800 hover:bg-slate-700 rounded-full transition-all duration-300 shadow-md">Marcio</a>
             </div>
         </footer>
+
+        <!-- === FIM DO HTML RESTAURADO === -->
+
     </div>
 
-    <!-- Modal (Popup) para Imagens e Vídeos -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden transition-opacity duration-300">
-        <div class="bg-gray-900 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
-            <!-- Título do Modal -->
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-gray-100"></h3>
-                <button id="modal-close" class="text-gray-500 hover:text-white text-4xl">&times;</button>
-            </div>
-            <!-- Conteúdo do Modal -->
-            <div id="modal-content" class="text-gray-300">
-                <!-- O conteúdo será injetado aqui via JavaScript -->
-            </div>
-        </div>
-    </div>
+    <!-- Modal (Popup) para Imagens e Vídeos - HTML REMOVIDO -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const tabs = document.querySelectorAll('.tab-btn');
             const contents = document.querySelectorAll('.tab-content');
             
-            // Elementos do Modal
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const modalClose = document.getElementById('modal-close');
+            // CONSTANTES DO MODAL REMOVIDAS (pois o HTML não existe mais)
+            // const modal = document.getElementById('modal');
+            // const modalTitle = document.getElementById('modal-title');
+            // const modalContent = document.getElementById('modal-content');
+            // const modalClose = document.getElementById('modal-close');
+
+            // --- LÓGICA DA NOVA CALCULADORA (SEU JS + LÓGICA NERDAMER) ---
             
-            <!-- Botões de Gatilho do Modal - REMOVIDOS -->
-            <!--
-            const imgBtn = document.getElementById('img-btn');
-            const vidBtn = document.getElementById('vid-btn');
-            const curBtn = document.getElementById('cur-btn'); // Botão de curiosidades
-            -->
+            // 1. Lógica para trocar as abas INTERNAS da calculadora (Seu código)
+            const navBotoes = document.querySelectorAll('.nav-btn');
+            const secoes = document.querySelectorAll('.calc-secao');
 
-            <!-- --- LÓGICA DA CALCULADORA --- -->
-            const calcInput = document.getElementById('calc-input');
-            const calcSolveBtn = document.getElementById('calc-solve');
-            const calcClearBtn = document.getElementById('calc-clear');
-            const calcResult = document.getElementById('calc-result');
-            // Novos botões
-            const calcBackspaceBtn = document.getElementById('calc-backspace');
-            const calcKeypadBtns = document.querySelectorAll('#calc-keypad button[data-value]');
+            navBotoes.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.dataset.target;
+                    const targetSecao = document.getElementById(targetId);
 
-            if (calcSolveBtn) {
-                calcSolveBtn.addEventListener('click', () => {
-                    const expression = calcInput.value;
-                    if (!expression) {
-                        calcResult.textContent = 'Por favor, insira uma expressão.';
-                        calcResult.classList.add('text-red-400');
-                        calcResult.classList.remove('text-green-400');
-                        return;
-                    }
-                    
-                    try {
-                        // Usa a biblioteca nerdamer (importada no <head>)
-                        const result = nerdamer(expression).evaluate();
-                        calcResult.textContent = result.toString();
-                        calcResult.classList.remove('text-red-400');
-                        calcResult.classList.add('text-green-400');
-                    } catch (error) {
-                        calcResult.textContent = `Erro: ${error.message}`;
-                        calcResult.classList.add('text-red-400');
-                        calcResult.classList.remove('text-green-400');
+                    navBotoes.forEach(b => b.classList.remove('active'));
+                    secoes.forEach(s => s.classList.remove('active'));
+
+                    btn.classList.add('active');
+                    if (targetSecao) {
+                        targetSecao.classList.add('active');
                     }
                 });
+            });
+
+            // 2. Lógica de Cálculo (NERDAMER) reconectada
+            
+            // Função genérica de cálculo
+            function calcular(expressao, resultadoElement) {
+                if (!expressao) {
+                    resultadoElement.textContent = 'Por favor, insira uma expressão.';
+                    resultadoElement.classList.add('erro');
+                    return;
+                }
+                try {
+                    // Limpa o resultado anterior
+                    resultadoElement.textContent = 'Calculando...';
+                    resultadoElement.classList.remove('erro');
+
+                    const resultado = nerdamer(expressao).evaluate();
+                    resultadoElement.textContent = resultado.toString();
+                } catch (error) {
+                    resultadoElement.textContent = `Erro: ${error.message}`;
+                    resultadoElement.classList.add('erro');
+                }
             }
 
-            if (calcClearBtn) {
-                calcClearBtn.addEventListener('click', () => {
-                    calcInput.value = '';
-                    calcResult.textContent = '';
-                    calcResult.classList.remove('text-red-400', 'text-green-400');
-                });
-            }
-
-            // --- NOVOS EVENT LISTENERS DA CALCULADORA ---
-            if (calcBackspaceBtn) {
-                calcBackspaceBtn.addEventListener('click', () => {
-                    calcInput.value = calcInput.value.slice(0, -1);
-                });
-            }
-
-            if (calcKeypadBtns) {
-                calcKeypadBtns.forEach(btn => {
-                    // Impede que o botão "=" (que também tem data-value) adicione um "=" ao input
-                    if (btn.id !== 'calc-solve') {
-                        btn.addEventListener('click', () => {
-                            // Se o visor for "0", substitui em vez de adicionar
-                            if (calcInput.value === '0') {
-                                calcInput.value = btn.dataset.value;
-                            } else {
-                                calcInput.value += btn.dataset.value;
-                            }
-                        });
+            // Botão Funções (Analisar/Resolver)
+            const btnFuncao = document.getElementById('btn-calc-funcao');
+            if (btnFuncao) {
+                btnFuncao.addEventListener('click', () => {
+                    const func = document.getElementById('input-funcao').value;
+                    const resEl = document.getElementById('resultado-funcoes');
+                    let expressao;
+                    if (func.includes('=')) {
+                        expressao = `solve(${func}, x)`; // Resolver
+                    } else {
+                        expressao = `simplify(${func})`; // Simplificar
                     }
+                    calcular(expressao, resEl);
                 });
             }
 
+            // Botão Limites
+            const btnLimite = document.getElementById('btn-calc-limite');
+            if (btnLimite) {
+                btnLimite.addEventListener('click', () => {
+                    const func = document.getElementById('input-limite-funcao').value;
+                    const ponto = document.getElementById('input-limite-ponto').value;
+                    const resEl = document.getElementById('resultado-limites');
+                    const expressao = `limit(${func}, x, ${ponto})`;
+                    calcular(expressao, resEl);
+                });
+            }
 
-            // --- LÓGICA DAS ABAS ---
+            // Botão Derivadas
+            const btnDerivada = document.getElementById('btn-calc-derivada');
+            if (btnDerivada) {
+                btnDerivada.addEventListener('click', () => {
+                    const func = document.getElementById('input-derivada-funcao').value;
+                    const resEl = document.getElementById('resultado-derivadas');
+                    const expressao = `diff(${func}, x)`;
+                    calcular(expressao, resEl);
+                });
+            }
 
-            // Ativar a primeira aba por padrão
-            tabs[0].classList.add('tab-btn-active');
-            contents[0].classList.add('tab-content-active');
+            // Botão Integrais
+            const btnIntegral = document.getElementById('btn-calc-integral');
+            if (btnIntegral) {
+                btnIntegral.addEventListener('click', () => {
+                    const func = document.getElementById('input-integral-funcao').value;
+                    const resEl = document.getElementById('resultado-integrais');
+                    const expressao = `integrate(${func}, x)`;
+                    calcular(expressao, resEl);
+                });
+            }
+
+            // --- FIM DA LÓGICA DA NOVA CALCULADORA ---
+
+
+            // --- LÓGICA DAS ABAS PRINCIPAIS (Mantida) ---
+
+            // Ativar a primeira aba por padrão (Adicionando verificação de segurança)
+            if (tabs.length > 0 && contents.length > 0) {
+                tabs[0].classList.add('tab-btn-active');
+                contents[0].classList.add('tab-content-active');
+            }
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -623,122 +731,38 @@
                     const contentToShow = document.getElementById(tabName + '-content');
                     
                     tab.classList.add('tab-btn-active');
-                    contentToShow.classList.add('tab-content-active');
+                    if (contentToShow) {
+                        contentToShow.classList.add('tab-content-active');
+                    }
                 });
             });
 
-            // --- LÓGICA DO MODAL (Mantida caso seja necessária no futuro) ---
-
-            // Função para abrir o modal
+            // --- LÓGICA DO MODAL (REMOVIDA POIS NÃO É MAIS USADA) ---
+            /*
             const openModal = (title, contentHTML) => {
-                if (modalTitle) modalTitle.textContent = title;
-                if (modalContent) modalContent.innerHTML = contentHTML;
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
-                }
+                ...
             };
-
-            // Função para fechar o modal
             const closeModal = () => {
-                if (modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                }
-                if (modalContent) modalContent.innerHTML = ''; // Limpa o conteúdo
+                ...
             };
-
-            // Event Listeners dos botões do modal
             if (modalClose) modalClose.addEventListener('click', closeModal);
-            // Fechar ao clicar fora do conteúdo do modal
             if (modal) {
                 modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeModal();
-                    }
+                    ...
                 });
             }
+            */
 
+            // --- LÓGICA DOS BOTÕES ANTIGOS (REMOVIDA) ---
             <!-- Conteúdo para o botão "Ver Imagens" - REMOVIDO -->
-            <!--
-            if (imgBtn) {
-                imgBtn.addEventListener('click', () => {
-                    const imageContent = `
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <img src="https://placehold.co/600x400/A0A0A0/FFFFFF?text=Vista+Externa+Coliseu" alt="Vista externa do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                                <p class="text-center text-sm mt-2 italic text-gray-400">Representação da vista externa.</p>
-                            </div>
-                            <div>
-                                <img src="https://placehold.co/600x400/B0B0B0/FFFFFF?text=Interior+e+Arena" alt="Interior do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                                <p class="text-center text-sm mt-2 italic text-gray-400">Representação do interior e da arena.</p>
-                            </div>
-                            <div>
-                                <img src="https://placehold.co/600x400/C0C0C0/FFFFFF?text=Arcos+Romanos" alt="Arcos do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                                <p class="text-center text-sm mt-2 italic text-gray-400">Detalhe dos arcos de sustentação.</p>
-                            </div>
-                            <div>
-                                <img src="https://placehold.co/600x400/D0D0D0/FFFFFF?text=Hipogeu+(Subterrâneo)" alt="Hipogeu do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                                <p class="text-center text-sm mt-2 italic text-gray-400">O hipogeu, área subterrânea sob a arena.</p>
-                            </div>
-                        </div>
-                    `;
-                    openModal('Imagens do Coliseu', imageContent);
-                });
-            }
-            -->
-
+            <!-- ... -->
             <!-- Conteúdo para o botão "Curiosidades e Vídeos" - REMOVIDO -->
-            <!--
-            if (vidBtn) {
-                vidBtn.addEventListener('click', () => {
-                    const videoContent = `
-                        <p class="mb-4">Explore mais sobre esta maravilha da engenharia com estes recursos:</p>
-                        <ul class="list-disc list-inside space-y-3">
-                            <li>
-                                <a href="https://www.youtube.com/watch?v=z3b0x3a-8Rk" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline font-semibold">
-                                    Vídeo: Reconstrução 3D do Coliseu (Link Externo)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/watch?v=K5tVb-yL-aE" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline font-semibold">
-                                    Vídeo: O Velário (O toldo retrátil) (Link Externo)
-                                </a>
-                            </li>
-                        </ul>
-                    `;
-                    openModal('Vídeos sobre o Coliseu', videoContent);
-                });
-            }
-            -->
-
+            <!-- ... -->
             <!-- Conteúdo para o botão "Curiosidades" - REMOVIDO -->
-            <!--
-            if (curBtn) {
-                curBtn.addEventListener('click', () => {
-                    const curiosidadesContent = `
-                        <ul class="list-disc list-inside space-y-4 text-base md:text-lg">
-                            <li>
-                                <strong class="text-gray-100">Evacuação Rápida:</strong> O Coliseu tinha 80 entradas e saídas, chamadas *vomitoria*. Elas eram tão eficientes que os 50.000 espectadores podiam evacuar o prédio em questão de minutos.
-                            </li>
-                            <li>
-                                <strong class="text-gray-100">Batalhas Navais:</strong> Nos primeiros anos, a arena do Coliseu podia ser inundada para realizar *naumachiae* (batalhas navais simuladas) antes da construção do hipogeu (o complexo subterrâneo).
-                            </li>
-                            <li>
-                                <strong class="text-gray-100">O Toldo Retrátil:</strong> O Coliseu possuía um *velário*, um enorme toldo retrátil operado por marinheiros romanos, para proteger os espectadores do sol e da chuva.
-                            </li>
-                        </ul>
-                    `;
-                    openModal('Curiosidades do Coliseu', curiosidadesContent);
-                });
-            }
-            -->
+            <!-- ... -->
         });
     </script>
 
 </body>
 </html>
-
-
-
 
