@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roteiro Interativo: Coliseu e Cálculo</title>
+    <!-- Título atualizado aqui -->
+    <title>Dos Arcos às Arenas: Como o Cálculo Deu Forma ao Coliseu</title>
     <!-- Importando o Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Importando o Nerdamer para Cálculo Simbólico -->
@@ -92,6 +93,389 @@
         details[open] > summary::after {
             transform: rotate(180deg);
         }
+
+        /* --- (NOVO) Estilos da Barra Lateral e Ajustes de Layout --- */
+        
+        /* Botão de Toggle Mobile (Esquerda) */
+        #sidebar-toggle {
+            position: fixed;
+            top: 1.5rem; /* 24px */
+            left: 1.5rem; /* 24px */
+            z-index: 100;
+            background-color: rgba(31, 41, 55, 0.8); /* bg-gray-800 com opacidade */
+            backdrop-filter: blur(5px);
+            border: 1px solid #4B5563; /* border-gray-600 */
+            color: white;
+            padding: 0.5rem; /* p-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            display: none; /* Oculto em desktop */
+            cursor: pointer;
+        }
+        #sidebar-toggle svg {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+        }
+
+        /* (NOVO) Botão de Toggle Mobile (Direita) */
+        #sidebar-toggle-right {
+            position: fixed;
+            top: 1.5rem; /* 24px */
+            right: 1.5rem; /* 24px */
+            z-index: 100;
+            background-color: rgba(31, 41, 55, 0.8); /* bg-gray-800 com opacidade */
+            backdrop-filter: blur(5px);
+            border: 1px solid #4B5563; /* border-gray-600 */
+            color: white;
+            padding: 0.5rem; /* p-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            display: none; /* Oculto em desktop */
+            cursor: pointer;
+        }
+        #sidebar-toggle-right svg {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+        }
+
+
+        /* A barra lateral (Esquerda) */
+        .info-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background-color: #111827; /* bg-gray-900 */
+            border-right: 1px solid #4B5563; /* border-gray-600 */
+            padding: 1.5rem; /* p-6 */
+            z-index: 110; /* Acima do toggle e overlay */
+            color: #D1D5DB; /* text-gray-300 */
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0); /* Visível em desktop */
+        }
+        .info-sidebar h3 {
+            font-size: 1.25rem; /* xl */
+            font-weight: 700; /* bold */
+            color: #FBBF24; /* text-yellow-400 */
+            margin-bottom: 1rem; /* mb-4 */
+            border-bottom: 1px solid #374151; /* border-gray-700 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        .info-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            space-y: 1rem; /* space-y-4 */
+        }
+        .info-sidebar li {
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4;
+            color: #D1D5DB; /* text-gray-300 */
+        }
+        .info-sidebar li strong {
+            color: #F9FAFB; /* text-gray-50 */
+            display: block; /* Título em negrito em linha separada */
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+        #sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9CA3AF; /* text-gray-400 */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: none; /* Oculto em desktop */
+        }
+        #sidebar-close svg {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+        }
+
+        /* (NOVO) A barra lateral (Direita) */
+        .right-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 280px;
+            background-color: #111827; /* bg-gray-900 */
+            border-left: 1px solid #4B5563; /* border-gray-600 */
+            padding: 1.5rem; /* p-6 */
+            z-index: 110; /* Acima do toggle e overlay */
+            color: #D1D5DB; /* text-gray-300 */
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0); /* Visível em desktop */
+        }
+        .right-sidebar h3 {
+            font-size: 1.25rem; /* xl */
+            font-weight: 700; /* bold */
+            color: #60A5FA; /* text-blue-400 */
+            margin-bottom: 1rem; /* mb-4 */
+            border-bottom: 1px solid #374151; /* border-gray-700 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        .right-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            space-y: 1rem; /* space-y-4 */
+        }
+        .right-sidebar li {
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4;
+            color: #D1D5DB; /* text-gray-300 */
+        }
+        .right-sidebar li strong {
+            color: #F9FAFB; /* text-gray-50 */
+            display: block; /* Título em negrito em linha separada */
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+        #sidebar-close-right {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9CA3AF; /* text-gray-400 */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: none; /* Oculto em desktop */
+        }
+        #sidebar-close-right svg {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+        }
+
+
+        /* Overlay para fechar em mobile */
+        #sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 105; /* Entre o sidebar e o conteúdo principal */
+            display: none; /* Oculto por padrão */
+        }
+        #sidebar-overlay.active {
+            display: block;
+        }
+
+        /* O container principal que é empurrado */
+        .main-container {
+            margin-left: 280px;
+            margin-right: 280px; /* (NOVO) Adicionada margem direita */
+            transition: margin-left 0.3s ease-in-out, margin-right 0.3s ease-in-out;
+        }
+        
+        /* Ajustes para mobile (Telas menores que 'lg' - 1024px) */
+        @media (max-width: 1024px) {
+            .info-sidebar {
+                transform: translateX(-100%); /* Oculto fora da tela */
+            }
+            .info-sidebar.active {
+                transform: translateX(0); /* Mostra */
+            }
+            
+            /* (NOVO) Regras da sidebar direita para mobile */
+            .right-sidebar {
+                transform: translateX(100%); /* Oculto fora da tela (direita) */
+            }
+            .right-sidebar.active {
+                transform: translateX(0); /* Mostra */
+            }
+
+            .main-container {
+                margin-left: 0; /* Ocupa a tela toda */
+                margin-right: 0; /* Ocupa a tela toda */
+            }
+            #sidebar-toggle {
+                display: inline-flex; /* Mostra o botão de toggle */
+            }
+            #sidebar-close {
+                display: block; /* Mostra o 'X' de fechar */
+            }
+
+            /* (NOVO) Mostrar botões da sidebar direita em mobile */
+            #sidebar-toggle-right {
+                display: inline-flex;
+            }
+            #sidebar-close-right {
+                display: block;
+            }
+        }
+
+
+        /* --- Estilos do Mapa Mental (NOVO) --- */
+        .mindmap-wrapper {
+            margin-top: 2rem; /* mt-8 */
+            padding: 1.5rem; /* p-6 */
+            background-color: #111827; /* bg-gray-900 (um pouco mais escuro que o card) */
+            border-radius: 0.75rem; /* rounded-lg */
+            border: 1px solid #4B5563; /* border-gray-600 */
+            overflow-x: auto; /* Permite rolagem horizontal se for muito largo */
+        }
+
+        .mindmap-wrapper h3 {
+            font-size: 1.5em; /* 2xl */
+            font-weight: 700; /* bold */
+            color: #F9FAFB; /* text-gray-50 */
+            margin-bottom: 2rem; /* mb-8 */
+            text-align: center;
+        }
+
+        .mindmap {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding: 20px 0;
+            min-width: 800px; /* Garante espaço para o mapa horizontal */
+        }
+
+        .mindmap ul {
+            position: relative;
+            padding-top: 40px; /* Espaço para a linha do pai */
+            display: flex;
+            justify-content: center;
+        }
+
+        .mindmap li {
+            position: relative;
+            padding: 12px 18px;
+            margin: 0 10px;
+            text-align: center;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+            min-width: 130px;
+            list-style: none;
+            animation: fadeInNode 0.5s ease-in-out forwards;
+            opacity: 0;
+            border: 1px solid #4B5563;
+        }
+
+        .mindmap li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Nó Central */
+        .mindmap > li {
+            background-color: #FBBF24; /* bg-yellow-400 */
+            color: #1F2937; /* text-gray-800 */
+            font-size: 1.1em;
+            border-color: #FBBF24;
+        }
+
+        /* Nós Filhos (Nível 1) */
+        .mindmap > li > ul > li {
+            background-color: #3B82F6; /* bg-blue-500 */
+            animation-delay: 0.2s;
+            border-color: #3B82F6;
+        }
+
+        /* Nós Netos (Nível 2) */
+        .mindmap > li > ul > li > ul {
+            padding-top: 30px; /* Menor espaço */
+        }
+        
+        .mindmap > li > ul > li > ul > li {
+            background-color: #10B981; /* bg-green-500 */
+            font-size: 0.9em;
+            font-weight: 500;
+            min-width: 100px;
+            padding: 8px;
+            animation-delay: 0.4s;
+            border-color: #10B981;
+        }
+
+        /* Linhas */
+        .mindmap li::before, .mindmap li::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            border-color: #4B5563; /* border-gray-600 */
+            z-index: -1;
+        }
+
+        /* Linha para cima (conectando ao pai) */
+        .mindmap li::before {
+            top: 0;
+            height: 40px; /* Distância do pai */
+            border-left: 2px solid #4B5563;
+            transform: translateY(-40px);
+        }
+        
+        .mindmap > li > ul > li > ul > li::before {
+             height: 30px; /* Distância menor para netos */
+             transform: translateY(-30px);
+        }
+
+        /* Linha horizontal (conectando irmãos) */
+        .mindmap li::after {
+            top: -40px; /* Posição da linha horizontal */
+            width: 100%;
+            border-top: 2px solid #4B5563;
+            transform: translateX(-50%);
+        }
+        
+        .mindmap > li > ul > li > ul > li::after {
+            top: -30px; /* Posição da linha horizontal menor */
+        }
+
+        /* Ajustes para o nó raiz (não ter linha para cima) */
+        .mindmap > li::before, .mindmap > li::after {
+            display: none;
+        }
+
+        /* Ajustes para a primeira/última criança (não ter linha lateral inteira) */
+        .mindmap li:first-child::after {
+            left: 50%;
+            width: 50%;
+        }
+        .mindmap li:last-child::after {
+            left: 0;
+            width: 50%;
+        }
+        /* Se for filho único, não precisa de linha horizontal */
+        .mindmap li:only-child::after {
+            display: none;
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeInNode {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ajustes para mobile: empilhar */
+        @media (max-width: 768px) {
+            .mindmap {
+                min-width: 0; /* Remove a largura mínima */
+                flex-direction: column;
+                align-items: center;
+            }
+            .mindmap ul {
+                flex-direction: column;
+                align-items: center;
+                padding-top: 20px;
+            }
+            .mindmap li {
+                margin: 10px 0;
+                width: 80%;
+            }
+            .mindmap li::before {
+                transform: translateY(-20px);
+                height: 20px;
+            }
+            /* Desativa linhas horizontais em mobile */
+            .mindmap li::after,
+            .mindmap li:first-child::after, 
+            .mindmap li:last-child::after {
+                display: none;
+            }
+        }
+        /* --- Fim dos Estilos do Mapa Mental --- */
+
 
         /* --- ESTILOS DA CALCULADORA ANTIGA (REMOVIDOS) --- */
         /* .calc-btn, .calc-btn-num, .calc-btn-op, .calc-btn-action, .calc-btn-eq ... REMOVIDOS */
@@ -229,13 +613,96 @@
     </style>
 </head>
 <body class="min-h-screen relative overflow-x-hidden">
+
+    <!-- (NOVO) Botão de Toggle Mobile (Esquerda) -->
+    <button id="sidebar-toggle" aria-label="Abrir fatos rápidos">
+        <!-- Ícone de Menu (Hamburger) -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+    </button>
+
+    <!-- (NOVO) Botão de Toggle Mobile (Direita) -->
+    <button id="sidebar-toggle-right" aria-label="Abrir conceitos de cálculo">
+        <!-- Ícone de Livro/Função -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        </svg>
+    </button>
+
+
+    <!-- (NOVO) Barra Lateral de Informações (Esquerda) - AGORA COM <aside> -->
+    <aside id="info-sidebar" class="info-sidebar">
+        <!-- Botão de Fechar Mobile -->
+        <button id="sidebar-close" aria-label="Fechar fatos rápidos">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <h3>Fatos Rápidos</h3>
+        <ul>
+            <li>
+                <strong>Capacidade Máxima:</strong> O Coliseu podia abrigar entre 50.000 e 80.000 espectadores, um número comparável aos estádios modernos.
+            </li>
+            <li>
+                <strong>Evacuação Rápida:</strong> Graças aos 80 portões (vomitoria), a multidão inteira podia ser evacuada em cerca de 15 minutos. Isso é um problema de "limites" e "taxas de variação".
+            </li>
+            <li>
+                <strong>Forma Elíptica:</strong> A arena é uma elipse (não um círculo) para maximizar a visibilidade e a ação, descrita por `x²/a² + y²/b² = 1`.
+            </li>
+            <li>
+                <strong>Engenharia da Visão:</strong> A inclinação dos assentos segue uma curva parabólica (`y = ax² + ...`) para garantir que cada fileira visse por cima da anterior.
+            </li>
+            <li>
+                <strong>Batalhas Navais:</strong> Nos seus primeiros anos, a arena podia ser inundada para simular batalhas navais (naumachiae). O cálculo do volume de água (`∫ A dh`) era essencial.
+            </li>
+            <li>
+                <strong>Materiais:</strong> Foram usadas mais de 100.000 m³ de pedra de travertino, unidas por 300 toneladas de grampos de ferro, além de concreto romano.
+            </li>
+        </ul>
+    </aside>
+
+    <!-- (NOVO) Barra Lateral de Conceitos (Direita) - AGORA COM <aside> -->
+    <aside id="right-sidebar" class="right-sidebar">
+        <!-- Botão de Fechar Mobile -->
+        <button id="sidebar-close-right" aria-label="Fechar conceitos de cálculo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <h3>Conceitos de Cálculo</h3>
+        <ul>
+            <li>
+                <strong>ƒ(x) Funções:</strong> Descrevem relações. A elipse `x²/a² + y²/b² = 1` define a forma da arena, e uma parábola `y = ax²` define a curva ideal dos assentos para visão.
+            </li>
+            <li>
+                <strong>→ Limites:</strong> Estudam a aproximação. Usado para definir a carga *limite* que um arco romano suporta antes de quebrar ou o fluxo *limite* de pessoas saindo pelos portões.
+            </li>
+            <li>
+                <strong>∆ Derivadas:</strong> Medem a taxa de variação (inclinação). Essencial para calcular a inclinação exata dos assentos (visibilidade) e a inclinação do piso para drenagem da água.
+            </li>
+            <li>
+                <strong>∫ Integrais:</strong> Calculam a soma total (área/volume). Usado para descobrir o *volume* total de concreto e pedra necessários ou o *volume* de água para encher a arena.
+            </li>
+        </ul>
+    </aside>
+
+
+    <!-- (NOVO) Overlay Mobile -->
+    <div id="sidebar-overlay"></div>
+
+
     <!-- Overlay de gradiente que cobre a parte superior da página, esmaecendo a imagem -->
     <div class="absolute inset-0 z-0 bg-gradient-to-b from-black via-transparent to-black" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.0) 75%, rgba(0,0,0,0.0) 100%);"></div>
 
-    <div class="container max-w-5xl mx-auto py-8 px-4 md:py-12 md:px-12 relative z-10">
+    <!-- Classe 'main-container' (NOVA) adicionada para o ajuste de margem -->
+    <div class="container main-container max-w-5xl mx-auto py-8 px-4 md:py-12 md:px-12 relative z-10">
         <div class="flex flex-col items-center gap-4 mb-12 mt-8 md:mb-16">
+            <!-- Título H1 atualizado aqui -->
             <h1 class="text-3xl md:text-6xl font-bold text-center text-gray-100 leading-tight" style="text-shadow: 0px 0px 10px rgba(0,0,0,0.8);">
-                O Coliseu e o Cálculo
+                Dos Arcos às Arenas: Como o Cálculo Deu Forma ao Coliseu
             </h1>
             <p class="text-base md:text-xl text-gray-300 text-center max-w-2xl">
                 Explore a história e a engenharia do Coliseu através das lentes do cálculo.
@@ -272,7 +739,7 @@
             <!-- Conteúdo das Abas -->
             <div class="p-6 md:p-12 min-h-[400px]">
                 
-                <!-- Aba: História -->
+                <!-- Aba: História (COM MAPA MENTAL RESTAURADO) -->
                 <div id="historia-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
@@ -350,8 +817,50 @@
                             </ul>
                         </div>
                     </details>
+                    
+                    <!-- (NOVO) Mapa Mental Dinâmico -->
+                    <div class="mindmap-wrapper">
+                        <h3>Mapa Mental: A História do Coliseu</h3>
+                        <ul class="mindmap">
+                            <li>Coliseu (Anfiteatro Flaviano)
+                                <ul>
+                                    <li>Origem e Construção
+                                        <ul>
+                                            <li>70-80 d.C.</li>
+                                            <li>Dinastia Flaviana</li>
+                                            <li>Local (Lago de Nero)</li>
+                                            <li>Financiamento (Guerra Judaica)</li>
+                                        </ul>
+                                    </li>
+                                    <li>Estrutura e Inovação
+                                        <ul>
+                                            <li>Elipse</li>
+                                            <li>Vomitoria (Acessos)</li>
+                                            <li>Velário (Toldo)</li>
+                                            <li>Hipogeu (Subterrâneo)</li>
+                                        </ul>
+                                    </li>
+                                    <li>Espetáculos
+                                        <ul>
+                                            <li>Gladiadores</li>
+                                            <li>Caça (Venationes)</li>
+                                            <li>Batalhas Navais</li>
+                                        </ul>
+                                    </li>
+                                    <li>Pós-Roma
+                                        <ul>
+                                            <li>Terremotos</li>
+                                            <li>Idade Média (Fortaleza)</li>
+                                            <li>UNESCO (1980)</li>
+                                            <li>Maravilha do Mundo (2007)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Fim do Mapa Mental -->
 
-                    <!-- Botões Removidos -->
                 </div>
 
                 <!-- Aba: Função -->
@@ -760,6 +1269,53 @@
             <!-- ... -->
             <!-- Conteúdo para o botão "Curiosidades" - REMOVIDO -->
             <!-- ... -->
+
+            <!-- --- (NOVO) LÓGICA DA BARRA LATERAL (SIDEBAR) --- -->
+            const sidebar = document.getElementById('info-sidebar');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const closeBtn = document.getElementById('sidebar-close');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            // (NOVO) Elementos da Sidebar Direita
+            const sidebarRight = document.getElementById('right-sidebar');
+            const toggleBtnRight = document.getElementById('sidebar-toggle-right');
+            const closeBtnRight = document.getElementById('sidebar-close-right');
+
+
+            if (sidebar && toggleBtn && closeBtn && overlay && sidebarRight && toggleBtnRight && closeBtnRight) {
+                // Abrir a sidebar ESQUERDA
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                });
+
+                // Fechar a sidebar ESQUERDA (pelo 'X')
+                closeBtn.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+
+                // (NOVO) Abrir a sidebar DIREITA
+                toggleBtnRight.addEventListener('click', () => {
+                    sidebarRight.classList.add('active');
+                    overlay.classList.add('active');
+                });
+
+                // (NOVO) Fechar a sidebar DIREITA (pelo 'X')
+                closeBtnRight.addEventListener('click', () => {
+                    sidebarRight.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+
+
+                // Fechar AMBAS as sidebars (clicando no overlay)
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    sidebarRight.classList.remove('active'); // (NOVO)
+                    overlay.classList.remove('active');
+                });
+            }
+
         });
     </script>
 
