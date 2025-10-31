@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro Interativo: Coliseu e Cálculo</title>
+    <!-- Importando o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importando a fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definindo a fonte Inter como padrão */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Classe para o conteúdo da aba oculta */
+        .tab-content {
+            display: none;
+        }
+        /* Classe para o conteúdo da aba ativa */
+        .tab-content-active {
+            display: block;
+            /* Animação de fade-in */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        /* Classe para o botão da aba ativa */
+        .tab-btn-active {
+            border-bottom-width: 3px;
+            border-color: #60A5FA; /* blue-400 */
+            color: #60A5FA; /* blue-400 */
+            font-weight: 600;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen p-4 md:p-8 flex items-center justify-center">
+
+    <div class="container max-w-5xl mx-auto">
+        <h1 class="text-3xl md:text-5xl font-bold text-center text-gray-100 mb-8" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+            O Coliseu e o Cálculo
+        </h1>
+
+        <!-- Card principal da apresentação -->
+        <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+            
+            <!-- Navegação por Abas -->
+            <div class="flex flex-wrap border-b border-gray-600 bg-gray-700">
+                <button class="tab-btn p-4 md:p-5 text-sm md:text-base text-gray-300 hover:bg-gray-600 flex-grow text-center" data-tab="historia">
+                    História e Arquitetura
+                </button>
+                <button class="tab-btn p-4 md:p-5 text-sm md:text-base text-gray-300 hover:bg-gray-600 flex-grow text-center" data-tab="funcao">
+                    Função
+                </button>
+                <button class="tab-btn p-4 md:p-5 text-sm md:text-base text-gray-300 hover:bg-gray-600 flex-grow text-center" data-tab="limites">
+                    Limites
+                </button>
+                <button class="tab-btn p-4 md:p-5 text-sm md:text-base text-gray-300 hover:bg-gray-600 flex-grow text-center" data-tab="derivadas">
+                    Derivadas
+                </button>
+                <button class="tab-btn p-4 md:p-5 text-sm md:text-base text-gray-300 hover:bg-gray-600 flex-grow text-center" data-tab="integrais">
+                    Integrais
+                </button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="p-6 md:p-10 min-h-[400px]">
+                
+                <!-- Aba: História -->
+                <div id="historia-content" class="tab-content">
+                    <h2 class="text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        O Anfiteatro Flaviano, conhecido mundialmente como Coliseu, é um dos monumentos mais emblemáticos da Roma Antiga. Iniciado pelo imperador Vespasiano por volta de 70-72 d.C. e concluído por seu filho Tito em 80 d.C., ele foi palco de espetáculos públicos, incluindo combates de gladiadores, caças de animais selvagens e execuções.
+                    </p>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        Sua arquitetura elíptica era uma inovação, permitindo que até 50.000 espectadores tivessem uma visão clara da arena. Os engenheiros romanos utilizaram arcos e abóbadas de forma magistral para sustentar a imensa estrutura.
+                    </p>
+                    <!-- Botões Interativos -->
+                    <div class="flex flex-wrap gap-4">
+                        <button id="img-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300">
+                            Ver Imagens
+                        </button>
+                        <button id="vid-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300">
+                            Curiosidades e Vídeos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Aba: Função -->
+                <div id="funcao-content" class="tab-content">
+                    <h2 class="text-3xl font-bold text-gray-100 mb-4">O Coliseu e as Funções</h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        (Aqui você pode adicionar o conteúdo sobre Funções.)
+                    </p>
+                    <p class="text-gray-400 italic text-base leading-relaxed">
+                        <strong>Exemplo de Tópico:</strong> Como a forma elíptica do Coliseu pode ser descrita por uma função matemática? Poderíamos analisar a função que descreve os arcos ou a curva parabólica das fileiras de assentos (a *cávea*) para otimizar a visibilidade.
+                    </p>
+                </div>
+
+                <!-- Aba: Limites -->
+                <div id="limites-content" class="tab-content">
+                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Limites na Engenharia Romana</h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        (Aqui você pode adicionar o conteúdo sobre Limites.)
+                    </p>
+                    <p class="text-gray-400 italic text-base leading-relaxed">
+                        <strong>Exemplo de Tópico:</strong> Qual era o limite de estresse que os arcos de sustentação poderiam suportar? O conceito de limite é fundamental para entender a estabilidade estrutural e a capacidade máxima de público que o Coliseu poderia abrigar com segurança (o limite de pessoas tendendo a 50.000).
+                    </p>
+                </div>
+
+                <!-- Aba: Derivadas -->
+                <div id="derivadas-content" class="tab-content">
+                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Derivadas: A Inclinação da Arquibancada</h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        (Aqui você pode adicionar o conteúdo sobre Derivadas.)
+                    </p>
+                    <p class="text-gray-400 italic text-base leading-relaxed">
+                        <strong>Exemplo de Tópico:</strong> A derivada pode ser usada para calcular a taxa de variação da altura dos assentos. Como os engenheiros determinaram a inclinação (derivada) ideal da arquibancada para garantir que cada espectador pudesse ver a arena por cima da cabeça da pessoa à frente?
+                    </p>
+                </div>
+
+                <!-- Aba: Integrais -->
+                <div id="integrais-content" class="tab-content">
+                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Integrais: O Volume do Coliseu</h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        (Aqui você pode adicionar o conteúdo sobre Integrais.)
+                    </p>
+                    <p class="text-gray-400 italic text-base leading-relaxed">
+                        <strong>Exemplo de Tópico:</strong> Podemos usar integrais (como sólidos de revolução ou integração tripla) para estimar o volume total de materiais (concreto, travertino) necessários para construir o Coliseu. Ou ainda, calcular a área total da arena ou a área de superfície do velário (o toldo retrátil).
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal (Popup) para Imagens e Vídeos -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden transition-opacity duration-300">
+        <div class="bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-100"></h3>
+                <button id="modal-close" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+            </div>
+            <!-- Conteúdo do Modal -->
+            <div id="modal-content" class="text-gray-300">
+                <!-- O conteúdo será injetado aqui via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            // Elementos do Modal
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById('modal-close');
+            
+            // Botões de Gatilho do Modal
+            const imgBtn = document.getElementById('img-btn');
+            const vidBtn = document.getElementById('vid-btn');
+
+            // --- LÓGICA DAS ABAS ---
+
+            // Ativar a primeira aba por padrão
+            tabs[0].classList.add('tab-btn-active');
+            contents[0].classList.add('tab-content-active');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Desativar todas as abas
+                    tabs.forEach(t => t.classList.remove('tab-btn-active'));
+                    contents.forEach(c => c.classList.remove('tab-content-active'));
+
+                    // Ativar a aba clicada
+                    const tabName = tab.dataset.tab;
+                    const contentToShow = document.getElementById(tabName + '-content');
+                    
+                    tab.classList.add('tab-btn-active');
+                    contentToShow.classList.add('tab-content-active');
+                });
+            });
+
+            // --- LÓGICA DO MODAL ---
+
+            // Função para abrir o modal
+            const openModal = (title, contentHTML) => {
+                modalTitle.textContent = title;
+                modalContent.innerHTML = contentHTML;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            };
+
+            // Função para fechar o modal
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modalContent.innerHTML = ''; // Limpa o conteúdo
+            };
+
+            // Event Listeners dos botões
+            modalClose.addEventListener('click', closeModal);
+            // Fechar ao clicar fora do conteúdo do modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Conteúdo para o botão "Ver Imagens"
+            imgBtn.addEventListener('click', () => {
+                const imageContent = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <img src="https://placehold.co/600x400/A0A0A0/FFFFFF?text=Vista+Externa+Coliseu" alt="Vista externa do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                            <p class="text-center text-sm mt-2 italic text-gray-400">Representação da vista externa.</p>
+                        </div>
+                        <div>
+                            <img src="https://placehold.co/600x400/B0B0B0/FFFFFF?text=Interior+e+Arena" alt="Interior do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                            <p class="text-center text-sm mt-2 italic text-gray-400">Representação do interior e da arena.</p>
+                        </div>
+                        <div>
+                            <img src="https://placehold.co/600x400/C0C0C0/FFFFFF?text=Arcos+Romanos" alt="Arcos do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                            <p class="text-center text-sm mt-2 italic text-gray-400">Detalhe dos arcos de sustentação.</p>
+                        </div>
+                        <div>
+                            <img src="https://placehold.co/600x400/D0D0D0/FFFFFF?text=Hipogeu+(Subterrâneo)" alt="Hipogeu do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                            <p class="text-center text-sm mt-2 italic text-gray-400">O hipogeu, área subterrânea sob a arena.</p>
+                        </div>
+                    </div>
+                `;
+                openModal('Imagens do Coliseu', imageContent);
+            });
+
+            // Conteúdo para o botão "Curiosidades e Vídeos"
+            vidBtn.addEventListener('click', () => {
+                const videoContent = `
+                    <p class="mb-4">Explore mais sobre esta maravilha da engenharia com estes recursos:</p>
+                    <ul class="list-disc list-inside space-y-3">
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=z3b0x3a-8Rk" target="_blank" class="text-blue-400 hover:underline font-semibold">
+                                Vídeo: Reconstrução 3D do Coliseu (Link Externo)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=K5tVb-yL-aE" target="_blank" class="text-blue-400 hover:underline font-semibold">
+                                Vídeo: O Velário (O toldo retrátil) (Link Externo)
+                            </a>
+                        </li>
+                        <li>
+                            <strong class="text-gray-100">Curiosidade:</strong> O Coliseu tinha 80 entradas, permitindo que os 50.000 espectadores saíssem em questão de minutos. A logística de fluxo de multidão (um conceito relacionado ao cálculo) era incrivelmente avançada.
+                        </li>
+                    </ul>
+                `;
+                openModal('Curiosidades e Vídeos', videoContent);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
