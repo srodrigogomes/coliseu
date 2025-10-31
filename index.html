@@ -73,12 +73,12 @@
 <body class="min-h-screen relative overflow-x-hidden">
     <!-- Overlay de gradiente que cobre a parte superior da página, esmaecendo a imagem --><div class="absolute inset-0 z-0 bg-gradient-to-b from-black via-transparent to-black" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.0) 75%, rgba(0,0,0,0.0) 100%);"></div>
 
-    <div class="container max-w-5xl mx-auto py-12 px-6 md:px-12 relative z-10">
-        <div class="flex flex-col items-center gap-4 mb-16 mt-8">
-            <h1 class="text-4xl md:text-6xl font-bold text-center text-gray-100 leading-tight" style="text-shadow: 0px 0px 10px rgba(0,0,0,0.8);">
+    <div class="container max-w-5xl mx-auto py-8 px-4 md:py-12 md:px-12 relative z-10">
+        <div class="flex flex-col items-center gap-4 mb-12 mt-8 md:mb-16">
+            <h1 class="text-3xl md:text-6xl font-bold text-center text-gray-100 leading-tight" style="text-shadow: 0px 0px 10px rgba(0,0,0,0.8);">
                 O Coliseu e o Cálculo
             </h1>
-            <p class="text-lg md:text-xl text-gray-300 text-center max-w-2xl">
+            <p class="text-base md:text-xl text-gray-300 text-center max-w-2xl">
                 Explore a história e a engenharia do Coliseu através das lentes do cálculo.
             </p>
         </div>
@@ -103,26 +103,26 @@
                 </button>
             </div>
 
-            <!-- Conteúdo das Abas --><div class="p-8 md:p-12 min-h-[400px]">
+            <!-- Conteúdo das Abas --><div class="p-6 md:p-12 min-h-[400px]">
                 
                 <!-- Aba: História --><div id="historia-content" class="tab-content">
-                    <h2 class="text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         O Anfiteatro Flaviano, conhecido mundialmente como Coliseu, é um dos monumentos mais emblemáticos da Roma Antiga. Iniciado pelo imperador Vespasiano por volta de 70-72 d.C. e concluído por seu filho Tito em 80 d.C., ele foi palco de espetáculos públicos, incluindo combates de gladiadores, caças de animais selvagens e execuções.
                     </p>
-                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    <p class="text-base md:text-lg text-gray-300 mb-8 leading-relaxed">
                         Sua arquitetura elíptica era uma inovação, permitindo que até 50.000 espectadores tivessem uma visão clara da arena. Os engenheiros romanos utilizaram arcos e abóbadas de forma magistral para sustentar a imensa estrutura.
                     </p>
                     <!-- Botões Interativos (Estilo Pílula) --><div class="flex flex-wrap gap-4">
-                        <button id="img-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                        <button id="img-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Imagens">🖼️</span>
                             Ver Imagens
                         </button>
-                        <button id="vid-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                        <button id="vid-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Vídeos">🎥</span>
                             Vídeos
                         </button>
-                        <button id="cur-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                        <button id="cur-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Curiosidades">💡</span>
                             Curiosidades
                         </button>
@@ -130,8 +130,8 @@
                 </div>
 
                 <!-- Aba: Função --><div id="funcao-content" class="tab-content">
-                    <h2 class="text-3xl font-bold text-gray-100 mb-4">O Coliseu e as Funções</h2>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">O Coliseu e as Funções</h2>
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Funções.)
                     </p>
                     <p class="text-gray-400 italic text-base leading-relaxed">
@@ -140,8 +140,8 @@
                 </div>
 
                 <!-- Aba: Limites --><div id="limites-content" class="tab-content">
-                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Limites na Engenharia Romana</h2>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Limites na Engenharia Romana</h2>
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Limites.)
                     </p>
                     <p class="text-gray-400 italic text-base leading-relaxed">
@@ -150,8 +150,8 @@
                 </div>
 
                 <!-- Aba: Derivadas --><div id="derivadas-content" class="tab-content">
-                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Derivadas: A Inclinação da Arquibancada</h2>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Derivadas: A Inclinação da Arquibancada</h2>
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Derivadas.)
                     </p>
                     <p class="text-gray-400 italic text-base leading-relaxed">
@@ -160,8 +160,8 @@
                 </div>
 
                 <!-- Aba: Integrais --><div id="integrais-content" class="tab-content">
-                    <h2 class="text-3xl font-bold text-gray-100 mb-4">Integrais: O Volume do Coliseu</h2>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Integrais: O Volume do Coliseu</h2>
+                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Integrais.)
                     </p>
                     <p class="text-gray-400 italic text-base leading-relaxed">
@@ -176,7 +176,7 @@
     <!-- Modal (Popup) para Imagens e Vídeos --><div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden transition-opacity duration-300">
         <div class="bg-gray-900 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
             <!-- Título do Modal --><div class="flex justify-between items-center mb-4">
-                <h3 id="modal-title" class="text-2xl font-bold text-gray-100"></h3>
+                <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-gray-100"></h3>
                 <button id="modal-close" class="text-gray-500 hover:text-white text-4xl">&times;</button>
             </div>
             <!-- Conteúdo do Modal --><div id="modal-content" class="text-gray-300">
@@ -295,7 +295,7 @@
             // Conteúdo para o botão "Curiosidades"
             curBtn.addEventListener('click', () => {
                 const curiosidadesContent = `
-                    <ul class="list-disc list-inside space-y-4 text-lg">
+                    <ul class="list-disc list-inside space-y-4 text-base md:text-lg">
                         <li>
                             <strong class="text-gray-100">Evacuação Rápida:</strong> O Coliseu tinha 80 entradas e saídas, chamadas *vomitoria*. Elas eram tão eficientes que os 50.000 espectadores podiam evacuar o prédio em questão de minutos.
                         </li>
@@ -314,4 +314,5 @@
 
 </body>
 </html>
+
 
