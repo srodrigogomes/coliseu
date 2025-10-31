@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roteiro Interativo: Coliseu e Cálculo</title>
-    <!-- Importando o Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importando o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importando o Nerdamer para Cálculo Simbólico -->
+    <script src="https://cdn.jsdelivr.net/npm/nerdamer/nerdamer.all.min.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -30,7 +33,7 @@
             animation: fadeIn 0.5s ease-in-out;
         }
         .tab-btn-active {
-            background-color: #4B5563; /* bg-gray-600 */
+            background-color: #0d9488; /* teal-600 (Cor de destaque alterada) */
             color: #FFFFFF; /* text-white */
             font-weight: 600;
         }
@@ -68,10 +71,33 @@
             position: relative;
             z-index: 10;
         }
+
+        /* Estilização para o <details> (Div expansível) */
+        details > summary {
+            list-style: none; /* Remove o marcador padrão */
+        }
+        details > summary::-webkit-details-marker {
+            display: none; /* Remove o marcador no Chrome/Safari */
+        }
+        details > summary::marker {
+            display: none; /* Remove o marcador no Firefox */
+        }
+        /* Adiciona um ícone de seta (chevron) */
+        details > summary::after {
+            content: ' ▼';
+            font-size: 0.7em;
+            vertical-align: middle;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after {
+            transform: rotate(180deg);
+        }
+
     </style>
 </head>
 <body class="min-h-screen relative overflow-x-hidden">
-    <!-- Overlay de gradiente que cobre a parte superior da página, esmaecendo a imagem --><div class="absolute inset-0 z-0 bg-gradient-to-b from-black via-transparent to-black" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.0) 75%, rgba(0,0,0,0.0) 100%);"></div>
+    <!-- Overlay de gradiente que cobre a parte superior da página, esmaecendo a imagem -->
+    <div class="absolute inset-0 z-0 bg-gradient-to-b from-black via-transparent to-black" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.0) 75%, rgba(0,0,0,0.0) 100%);"></div>
 
     <div class="container max-w-5xl mx-auto py-8 px-4 md:py-12 md:px-12 relative z-10">
         <div class="flex flex-col items-center gap-4 mb-12 mt-8 md:mb-16">
@@ -83,53 +109,127 @@
             </p>
         </div>
 
-        <!-- Card principal da apresentação --><div class="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+        <!-- Card principal da apresentação -->
+        <div class="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
             
-            <!-- Navegação por Abas (Estilo Pílula) --><div class="flex flex-wrap border-b border-gray-700 bg-gray-800 p-3 justify-center gap-2">
-                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-gray-700 rounded-full transition-all duration-300" data-tab="historia">
+            <!-- Navegação por Abas (Estilo Pílula) -->
+            <div class="flex flex-wrap border-b border-gray-700 bg-gray-800 p-3 justify-center gap-2">
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="historia">
                     História
                 </button>
-                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-gray-700 rounded-full transition-all duration-300" data-tab="funcao">
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="funcao">
                     Função
                 </button>
-                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-gray-700 rounded-full transition-all duration-300" data-tab="limites">
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="limites">
                     Limites
                 </button>
-                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-gray-700 rounded-full transition-all duration-300" data-tab="derivadas">
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="derivadas">
                     Derivadas
                 </button>
-                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-gray-700 rounded-full transition-all duration-300" data-tab="integrais">
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="integrais">
                     Integrais
+                </button>
+                <!-- NOVA ABA DA CALCULADORA -->
+                <button class="tab-btn p-3 px-5 text-sm md:text-base text-gray-300 hover:bg-slate-700 rounded-full transition-all duration-300" data-tab="calculadora">
+                    🧮 Calculadora
                 </button>
             </div>
 
-            <!-- Conteúdo das Abas --><div class="p-6 md:p-12 min-h-[400px]">
+            <!-- Conteúdo das Abas -->
+            <div class="p-6 md:p-12 min-h-[400px]">
                 
-                <!-- Aba: História --><div id="historia-content" class="tab-content">
+                <!-- Aba: História -->
+                <div id="historia-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">A Magnífica História do Coliseu</h2>
-                    <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
-                        O Anfiteatro Flaviano, conhecido mundialmente como Coliseu, é um dos monumentos mais emblemáticos da Roma Antiga. Iniciado pelo imperador Vespasiano por volta de 70-72 d.C. e concluído por seu filho Tito em 80 d.C., ele foi palco de espetáculos públicos, incluindo combates de gladiadores, caças de animais selvagens e execuções.
+                    
+                    <!-- Frase adicionada -->
+                    <p class="text-base md:text-lg text-gray-300 mb-6 italic">
+                        Este trabalho tem como objetivo apresentar a origem, a função e as curiosidades que cercam esse monumento único.
                     </p>
+
+                    <!-- Parágrafo movido para cima -->
                     <p class="text-base md:text-lg text-gray-300 mb-8 leading-relaxed">
                         Sua arquitetura elíptica era uma inovação, permitindo que até 50.000 espectadores tivessem uma visão clara da arena. Os engenheiros romanos utilizaram arcos e abóbadas de forma magistral para sustentar a imensa estrutura.
                     </p>
-                    <!-- Botões Interativos (Estilo Pílula) --><div class="flex flex-wrap gap-4">
-                        <button id="img-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                    
+                    <!-- Div expansível 1 -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            Origem e Construção do Coliseu
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                                <li><strong>Construção:</strong> entre 70–80 d.C., sob os imperadores da dinastia Flaviana (Vespasiano e Tito).</li>
+                                <li><strong>Localização:</strong> erguido no espaço antes ocupado por um lago artificial da Domus Aurea de Nero.</li>
+                                <li><strong>Propósito:</strong> servir como espaço público para jogos, espetáculos e também como ferramenta de propaganda política.</li>
+                                <li><strong>Financiamento:</strong> parte obtida com espólios da Guerra Judaica (inclusive com o saque do Templo de Jerusalém).</li>
+                                <li><strong>Mão de obra:</strong> estima-se que mais de 100 mil escravos e prisioneiros de guerra participaram da construção.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Div expansível 2 (ATUALIZADA) -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            Estrutura e Inovações Arquitetônicas
+                        </summary>
+                        <div class="p-4 border-t border-gray-600 space-y-4">
+                            
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300">
+                                <li><strong>Capacidade:</strong> entre 50 e 80 mil espectadores.</li>
+                                <li><strong>Sistema de acessos:</strong> corredores e entradas numeradas permitiam encher ou esvaziar o estádio em cerca de 15 minutos.</li>
+                                <li><strong>Velário:</strong> enorme toldo retrátil sustentado por 240 mastros, manuseado por marinheiros, para proteger o público do sol.</li>
+                                <li><strong>Rede de água:</strong> mais de 100 fontes e banheiros públicos, conectados ao Cloaca Máxima (sistema de esgoto romano).</li>
+                                <li><strong>Hipogeu:</strong> estrutura subterrânea com túneis, elevadores, rampas e portas ocultas para introduzir gladiadores, animais e cenários de surpresa.</li>
+                            </ul>
+                            
+                            <h4 class="text-lg font-semibold text-gray-200 pt-2">Espetáculos no Coliseu</h4>
+                            <ul class="list-disc list-inside space-y-2 text-base md:text-lg text-gray-300 pl-4">
+                                <li>
+                                    <strong>Lutas de Gladiadores:</strong> Principal atração. Tinham papel social e político, reforçando o poder imperial.
+                                </li>
+                                <li>
+                                    <strong>Caças de Animais Exóticos:</strong> Animais (leões, tigres, elefantes) trazidos da África e Ásia, liberados de surpresa pelo hipogeu.
+                                </li>
+                                <li>
+                                    <strong>Batalhas Navais (Naumáquias):</strong> Nos primeiros anos, a arena podia ser inundada (cerca de 2m de água) para combates simulados com barcos. O enchimento levava de 40 min a 2h15. Essa prática cessou após a construção definitiva do hipogeu.
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Div expansível 3 (PLACEHOLDER) -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            Div 3 (Seu Título Aqui)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base text-gray-300">
+                                (Por favor, adicione o conteúdo da "Div 3" aqui.)
+                            </p>
+                        </div>
+                    </details>
+                    <!-- FIM DAS NOVAS DIVS -->
+                    
+                    <!-- Botões Interativos (Estilo Pílula) -->
+                    <div class="flex flex-wrap gap-4 mt-8">
+                        <button id="img-btn" class="bg-blue-600 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Imagens">🖼️</span>
                             Ver Imagens
                         </button>
-                        <button id="vid-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                        <button id="vid-btn" class="bg-gray-700 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Vídeos">🎥</span>
                             Vídeos
                         </button>
-                        <button id="cur-btn" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
+                        <button id="cur-btn" class="bg-gray-700 hover:bg-slate-700 text-white font-medium py-2 px-5 text-sm md:py-3 md:px-6 md:text-base rounded-full shadow-md transition-all duration-300 flex items-center gap-2">
                             <span role="img" aria-label="Curiosidades">💡</span>
                             Curiosidades
                         </button>
                     </div>
                 </div>
 
-                <!-- Aba: Função --><div id="funcao-content" class="tab-content">
+                <!-- Aba: Função -->
+                <div id="funcao-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">O Coliseu e as Funções</h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Funções.)
@@ -139,7 +239,8 @@
                     </p>
                 </div>
 
-                <!-- Aba: Limites --><div id="limites-content" class="tab-content">
+                <!-- Aba: Limites -->
+                <div id="limites-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Limites na Engenharia Romana</h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Limites.)
@@ -149,7 +250,8 @@
                     </p>
                 </div>
 
-                <!-- Aba: Derivadas --><div id="derivadas-content" class="tab-content">
+                <!-- Aba: Derivadas -->
+                <div id="derivadas-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Derivadas: A Inclinação da Arquibancada</h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Derivadas.)
@@ -159,28 +261,79 @@
                     </p>
                 </div>
 
-                <!-- Aba: Integrais --><div id="integrais-content" class="tab-content">
+                <!-- Aba: Integrais -->
+                <div id="integrais-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Integrais: O Volume do Coliseu</h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
                         (Aqui você pode adicionar o conteúdo sobre Integrais.)
-                    </p>
+                    </sem>
                     <p class="text-gray-400 italic text-base leading-relaxed">
                         <strong>Exemplo de Tópico:</strong> Podemos usar integrais (como sólidos de revolução ou integração tripla) para estimar o volume total de materiais (concreto, travertino) necessários para construir o Coliseu. Ou ainda, calcular a área total da arena ou a área de superfície do velário (o toldo retrátil).
                     </p>
                 </div>
 
+                <!-- Aba: Calculadora -->
+                <div id="calculadora-content" class="tab-content">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-6">Calculadora de Cálculo</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="calc-input" class="block text-sm font-medium text-gray-300 mb-2">Expressão (use a sintaxe do Nerdamer):</label>
+                            <input type="text" id="calc-input" class="w-full p-3 bg-gray-700 border border-gray-600 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Ex: diff(x^2, x) ou solve(x^2=4, x)">
+                            <p class="text-xs text-gray-400 mt-1">Exemplos: <code>diff(x^3, x)</code>, <code>integrate(2*x, x)</code>, <code>solve(x^2-1=0, x)</code></p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4">
+                            <button id="calc-solve" class="bg-blue-600 hover:bg-slate-700 text-white font-medium py-2 px-5 rounded-full shadow-md transition-all duration-300">
+                                Calcular / Simplificar
+                            </button>
+                            <button id="calc-clear" class="bg-gray-600 hover:bg-slate-700 text-white font-medium py-2 px-5 rounded-full shadow-md transition-all duration-300">
+                                Limpar
+                            </button>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Resultado:</h3>
+                            <pre id="calc-result" class="bg-gray-800 p-4 rounded-lg text-lg text-green-400 border border-gray-700 min-h-[50px] overflow-x-auto"></pre>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <!-- Rodapé com Participantes -->
+        <footer class="mt-12 py-8 border-t border-gray-700">
+            <h3 class="text-center text-xl font-semibold text-gray-300 mb-6">Participantes</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
+                    Rodrigo
+                </a>
+                <a href="#" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
+                    Pedro
+                </a>
+                <a href="#" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
+                    Lucas
+                </a>
+                <a href="#" class="bg-gray-800 hover:bg-slate-700 text-gray-200 font-medium py-3 px-6 rounded-full shadow-md transition-all duration-300">
+                    Marcio
+                </a>
+            </div>
+        </footer>
     </div>
 
-    <!-- Modal (Popup) para Imagens e Vídeos --><div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden transition-opacity duration-300">
+    <!-- Modal (Popup) para Imagens e Vídeos -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden transition-opacity duration-300">
         <div class="bg-gray-900 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
-            <!-- Título do Modal --><div class="flex justify-between items-center mb-4">
+            <!-- Título do Modal -->
+            <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-gray-100"></h3>
                 <button id="modal-close" class="text-gray-500 hover:text-white text-4xl">&times;</button>
             </div>
-            <!-- Conteúdo do Modal --><div id="modal-content" class="text-gray-300">
-                <!-- O conteúdo será injetado aqui via JavaScript --></div>
+            <!-- Conteúdo do Modal -->
+            <div id="modal-content" class="text-gray-300">
+                <!-- O conteúdo será injetado aqui via JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -200,11 +353,56 @@
             const vidBtn = document.getElementById('vid-btn');
             const curBtn = document.getElementById('cur-btn'); // Botão de curiosidades
 
+            // --- LÓGICA DA CALCULADORA ---
+            const calcInput = document.getElementById('calc-input');
+            const calcSolveBtn = document.getElementById('calc-solve');
+            const calcClearBtn = document.getElementById('calc-clear');
+            const calcResult = document.getElementById('calc-result');
+
+            if (calcSolveBtn) {
+                calcSolveBtn.addEventListener('click', () => {
+                    const expression = calcInput.value;
+                    if (!expression) {
+                        calcResult.textContent = 'Por favor, insira uma expressão.';
+                        calcResult.classList.add('text-red-400');
+                        calcResult.classList.remove('text-green-400');
+                        return;
+                    }
+                    
+                    try {
+                        // Usa a biblioteca nerdamer (importada no <head>)
+                        const result = nerdamer(expression).evaluate();
+                        calcResult.textContent = result.toString();
+                        calcResult.classList.remove('text-red-400');
+                        calcResult.classList.add('text-green-400');
+                    } catch (error) {
+                        calcResult.textContent = `Erro: ${error.message}`;
+                        calcResult.classList.add('text-red-400');
+                        calcResult.classList.remove('text-green-400');
+                    }
+                });
+            }
+
+            if (calcClearBtn) {
+                calcClearBtn.addEventListener('click', () => {
+                    calcInput.value = '';
+                    calcResult.textContent = '';
+                    calcResult.classList.remove('text-red-400');
+                    calcResult.classList.add('text-green-400');
+                });
+            }
+            // --- FIM DA LÓGICA DA CALCULADORA ---
+
+
             // --- LÓGICA DAS ABAS ---
 
             // Ativar a primeira aba por padrão
-            tabs[0].classList.add('tab-btn-active');
-            contents[0].classList.add('tab-content-active');
+            if (tabs.length > 0) {
+                tabs[0].classList.add('tab-btn-active');
+            }
+            if (contents.length > 0) {
+                contents[0].classList.add('tab-content-active');
+            }
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -217,7 +415,9 @@
                     const contentToShow = document.getElementById(tabName + '-content');
                     
                     tab.classList.add('tab-btn-active');
-                    contentToShow.classList.add('tab-content-active');
+                    if (contentToShow) {
+                        contentToShow.classList.add('tab-content-active');
+                    }
                 });
             });
 
@@ -239,80 +439,89 @@
             };
 
             // Event Listeners dos botões
-            modalClose.addEventListener('click', closeModal);
+            if (modalClose) {
+                modalClose.addEventListener('click', closeModal);
+            }
             // Fechar ao clicar fora do conteúdo do modal
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
 
             // Conteúdo para o botão "Ver Imagens"
-            imgBtn.addEventListener('click', () => {
-                const imageContent = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <img src="https://placehold.co/600x400/A0A0A0/FFFFFF?text=Vista+Externa+Coliseu" alt="Vista externa do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                            <p class="text-center text-sm mt-2 italic text-gray-400">Representação da vista externa.</p>
+            if (imgBtn) {
+                imgBtn.addEventListener('click', () => {
+                    const imageContent = `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <img src="https://placehold.co/600x400/A0A0A0/FFFFFF?text=Vista+Externa+Coliseu" alt="Vista externa do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                                <p class="text-center text-sm mt-2 italic text-gray-400">Representação da vista externa.</p>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/600x400/B0B0B0/FFFFFF?text=Interior+e+Arena" alt="Interior do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                                <p class="text-center text-sm mt-2 italic text-gray-400">Representação do interior e da arena.</p>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/600x400/C0C0C0/FFFFFF?text=Arcos+Romanos" alt="Arcos do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                                <p class="text-center text-sm mt-2 italic text-gray-400">Detalhe dos arcos de sustentação.</p>
+                            </div>
+                            <div>
+                                <img src="https://placehold.co/600x400/D0D0D0/FFFFFF?text=Hipogeu+(Subterrâneo)" alt="Hipogeu do Coliseu" class="rounded-lg shadow-md w-full h-auto">
+                                <p class="text-center text-sm mt-2 italic text-gray-400">O hipogeu, área subterrânea sob a arena.</p>
+                            </div>
                         </div>
-                        <div>
-                            <img src="https://placehold.co/600x400/B0B0B0/FFFFFF?text=Interior+e+Arena" alt="Interior do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                            <p class="text-center text-sm mt-2 italic text-gray-400">Representação do interior e da arena.</p>
-                        </div>
-                        <div>
-                            <img src="https://placehold.co/600x400/C0C0C0/FFFFFF?text=Arcos+Romanos" alt="Arcos do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                            <p class="text-center text-sm mt-2 italic text-gray-400">Detalhe dos arcos de sustentação.</p>
-                        </div>
-                        <div>
-                            <img src="https://placehold.co/600x400/D0D0D0/FFFFFF?text=Hipogeu+(Subterrâneo)" alt="Hipogeu do Coliseu" class="rounded-lg shadow-md w-full h-auto">
-                            <p class="text-center text-sm mt-2 italic text-gray-400">O hipogeu, área subterrânea sob a arena.</p>
-                        </div>
-                    </div>
-                `;
-                openModal('Imagens do Coliseu', imageContent);
-            });
+                    `;
+                    openModal('Imagens do Coliseu', imageContent);
+                });
+            }
 
             // Conteúdo para o botão "Curiosidades e Vídeos"
-            vidBtn.addEventListener('click', () => {
-                const videoContent = `
-                    <p class="mb-4">Explore mais sobre esta maravilha da engenharia com estes recursos:</p>
-                    <ul class="list-disc list-inside space-y-3">
-                        <li>
-                            <a href="https://www.youtube.com/watch?v=z3b0x3a-8Rk" target="_blank" class="text-blue-400 hover:underline font-semibold">
-                                Vídeo: Reconstrução 3D do Coliseu (Link Externo)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/watch?v=K5tVb-yL-aE" target="_blank" class="text-blue-400 hover:underline font-semibold">
-                                Vídeo: O Velário (O toldo retrátil) (Link Externo)
-                            </a>
-                        </li>
-                    </ul>
-                `;
-                openModal('Vídeos sobre o Coliseu', videoContent);
-            });
+            if (vidBtn) {
+                vidBtn.addEventListener('click', () => {
+                    const videoContent = `
+                        <p class="mb-4">Explore mais sobre esta maravilha da engenharia com estes recursos:</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>
+                                <a href="https://www.youtube.com/watch?v=z3b0x3a-8Rk" target="_blank" class="text-blue-400 hover:underline font-semibold">
+                                    Vídeo: Reconstrução 3D do Coliseu (Link Externo)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch?v=K5tVb-yL-aE" target="_blank" class="text-blue-400 hover:underline font-semibold">
+                                    Vídeo: O Velário (O toldo retrátil) (Link Externo)
+                                </a>
+                            </li>
+                        </ul>
+                    `;
+                    openModal('Vídeos sobre o Coliseu', videoContent);
+                });
+            }
 
             // Conteúdo para o botão "Curiosidades"
-            curBtn.addEventListener('click', () => {
-                const curiosidadesContent = `
-                    <ul class="list-disc list-inside space-y-4 text-base md:text-lg">
-                        <li>
-                            <strong class="text-gray-100">Evacuação Rápida:</strong> O Coliseu tinha 80 entradas e saídas, chamadas *vomitoria*. Elas eram tão eficientes que os 50.000 espectadores podiam evacuar o prédio em questão de minutos.
-                        </li>
-                        <li>
-                            <strong class="text-gray-100">Batalhas Navais:</strong> Nos primeiros anos, a arena do Coliseu podia ser inundada para realizar *naumachiae* (batalhas navais simuladas) antes da construção do hipogeu (o complexo subterrâneo).
-                        </li>
-                        <li>
-                            <strong class="text-gray-100">O Toldo Retrátil:</strong> O Coliseu possuía um *velário*, um enorme toldo retrátil operado por marinheiros romanos, para proteger os espectadores do sol e da chuva.
-                        </li>
-                    </ul>
-                `;
-                openModal('Curiosidades do Coliseu', curiosidadesContent);
-            });
+            if (curBtn) {
+                curBtn.addEventListener('click', () => {
+                    const curiosidadesContent = `
+                        <ul class="list-disc list-inside space-y-4 text-base md:text-lg">
+                            <li>
+                                <strong class="text-gray-100">Evacuação Rápida:</strong> O Coliseu tinha 80 entradas e saídas, chamadas *vomitoria*. Elas eram tão eficientes que os 50.000 espectadores podiam evacuar o prédio em questão de minutos.
+                            </li>
+                            <li>
+                                <strong class="text-gray-100">Batalhas Navais:</strong> Nos primeiros anos, a arena do Coliseu podia ser inundada para realizar *naumachiae* (batalhas navais simuladas) antes da construção do hipogeu (o complexo subterrâneo).
+                            </li>
+                            <li>
+                                <strong class="text-gray-100">O Toldo Retrátil:</strong> O Coliseu possuía um *velário*, um enorme toldo retrátil operado por marinheiros romanos, para proteger os espectadores do sol e da chuva.
+                            </li>
+                        </ul>
+                    `;
+                    openModal('Curiosidades do Coliseu', curiosidadesContent);
+                });
+            }
         });
     </script>
 
 </body>
 </html>
-
 
