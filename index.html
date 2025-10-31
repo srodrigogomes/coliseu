@@ -93,6 +93,28 @@
             transform: rotate(180deg);
         }
 
+        /* --- NOVOS ESTILOS DA CALCULADORA --- */
+        .calc-btn {
+            @apply p-3 rounded-lg text-white font-semibold text-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500;
+        }
+        /* Botões de números e 'x' */
+        .calc-btn-num {
+            @apply bg-gray-700 hover:bg-slate-700;
+        }
+        /* Botões de operadores (+, -, *, /) e funções (sin, diff) */
+        .calc-btn-op {
+            @apply bg-gray-600 hover:bg-slate-600;
+        }
+        /* Botões de ação (C, <-) */
+        .calc-btn-action {
+            @apply bg-slate-800 hover:bg-slate-700;
+        }
+        /* Botão de igual (=) */
+        .calc-btn-eq {
+            @apply bg-slate-600 hover:bg-slate-500 col-span-2;
+        }
+        /* --- FIM DOS ESTILOS DA CALCULADORA --- */
+
     </style>
 </head>
 <body class="min-h-screen relative overflow-x-hidden">
@@ -247,67 +269,215 @@
                 <!-- Aba: Função -->
                 <div id="funcao-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">O Coliseu e as Funções</h2>
+                    
+                    <!-- Elemento Visual Adicionado -->
+                    <img src="https://placehold.co/800x300/334155/E0E7FF?text=Gráfico+de+uma+Elipse+e+Parábolas" alt="Gráfico de funções" class="w-full h-auto rounded-lg shadow-md mb-8">
+
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
-                        (Aqui você pode adicionar o conteúdo sobre Funções.)
-                    </sem>
-                    <p class="text-gray-400 italic text-base leading-relaxed">
-                        <strong>Exemplo de Tópico:</strong> Como a forma elíptica do Coliseu pode ser descrita por uma função matemática? Poderíamos analisar a função que descreve os arcos ou a curva parabólica das fileiras de assentos (a *cávea*) para otimizar a visibilidade.
+                        Uma função descreve uma relação entre entradas e saídas. A arquitetura do Coliseu é um exemplo perfeito de funções aplicadas no mundo real, definindo sua forma, estrutura e eficiência.
                     </p>
+
+                    <!-- Seções Expansíveis Adicionadas -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            🏛️ A Elipse da Arena (Função Elíptica)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                A forma do Coliseu não é um círculo, mas uma elipse. Isso pode ser descrito pela função:
+                                <br><code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">x²/a² + y²/b² = 1</code>
+                                <br>
+                                Onde 'a' é o raio maior e 'b' é o raio menor. Essa escolha não foi aleatória: uma arena elíptica maximiza o espaço de visualização para o público, permitindo que mais pessoas fiquem "perto" da ação central em comparação com um círculo.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            📈 A Curva dos Assentos (Função Parabólica)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                A inclinação da arquibancada (a *cávea*) não é uma linha reta. Ela segue uma curva, semelhante a uma parábola (uma função quadrática, <code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">y = ax² + bx + c</code>). Os engenheiros romanos calcularam essa curva para garantir que cada fileira de assentos tivesse uma linha de visão clara para a arena, passando por cima da cabeça da pessoa na frente.
+                            </p>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- Aba: Limites -->
                 <div id="limites-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Limites na Engenharia Romana</h2>
+
+                    <!-- Elemento Visual Adicionado -->
+                    <img src="https://placehold.co/800x300/334155/E0E7FF?text=Conceito+de+Limite+(Aproximação)" alt="Gráfico de limites" class="w-full h-auto rounded-lg shadow-md mb-8">
+
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
-                        (Aqui você pode adicionar o conteúdo sobre Limites.)
+                        O conceito de limite estuda o comportamento de uma função à medida que ela se aproxima de um ponto. Para os romanos, isso era fundamental para entender a estabilidade e a capacidade máxima de suas estruturas.
                     </p>
-                    <p class="text-gray-400 italic text-base leading-relaxed">
-                        <strong>Exemplo de Tópico:</strong> Qual era o limite de estresse que os arcos de sustentação poderiam suportar? O conceito de limite é fundamental para entender a estabilidade estrutural e a capacidade máxima de público que o Coliseu poderia abrigar com segurança (o limite de pessoas tendendo a 50.000).
-                    </p>
+
+                    <!-- Seções Expansíveis Adicionadas -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            🧱 Limite de Carga nos Arcos
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                Cada arco de sustentação do Coliseu tinha um "limite" de peso que podia suportar antes de falhar. Os engenheiros tiveram que calcular a força total (o peso dos materiais acima mais o peso das pessoas) e garantir que essa força nunca atingisse o limite de ruptura do material. O conceito de limite é usado para definir a tensão máxima que um material pode suportar.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            👥 Limite de Evacuação (Vomitoria)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                Os 80 portões de saída (vomitoria) foram projetados para evacuar 50.000 pessoas em minutos. O fluxo de pessoas (P) por tempo (t) pode ser visto como um limite:
+                                <br><code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">lim (ΔP / Δt)</code> com <code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">Δt → 0</code>.
+                                <br>
+                                Os romanos precisavam maximizar essa taxa (o "limite" do fluxo de pessoas) para garantir a segurança e evitar gargalos, otimizando a largura e a posição dos corredores.
+                            </p>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- Aba: Derivadas -->
                 <div id="derivadas-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Derivadas: A Inclinação da Arquibancada</h2>
+
+                    <!-- Elemento Visual Adicionado -->
+                    <img src="https://placehold.co/800x300/334155/E0E7FF?text=Reta+Tangente+(Derivada)" alt="Gráfico de derivadas" class="w-full h-auto rounded-lg shadow-md mb-8">
+
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
-                        (Aqui você pode adicionar o conteúdo sobre Derivadas.)
+                        A derivada de uma função representa sua taxa instantânea de variação, ou seja, a inclinação em um ponto específico. No Coliseu, a inclinação era tudo.
                     </p>
-                    <p class="text-gray-400 italic text-base leading-relaxed">
-                        <strong>Exemplo de Tópico:</strong> A derivada pode ser usada para calcular a taxa de variação da altura dos assentos. Como os engenheiros determinaram a inclinação (derivada) ideal da arquibancada para garantir que cada espectador pudesse ver a arena por cima da cabeça da pessoa à frente?
-                    </p>
+
+                    <!-- Seções Expansíveis Adicionadas -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            📐 Otimizando a Visibilidade
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                A derivada da função da arquibancada (<code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">y'</code>) determina a inclinação em cada fileira. Os engenheiros romanos calcularam essa derivada para que ela aumentasse gradualmente.
+                                <br><br>
+                                Se a inclinação (derivada) fosse muito baixa, as pessoas de trás não veriam. Se fosse muito alta, os degraus seriam perigosamente íngremes. Eles encontraram a "taxa de variação" ideal para a inclinação, otimizando a visibilidade.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            💧 Drenagem da Água (Taxa de Variação)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                A inclinação (derivada) do piso da arena e dos corredores era crucial para a drenagem da água da chuva (ou das batalhas navais). Uma derivada ligeiramente negativa (<code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">y' < 0</code>) garantia que a água escoasse para os drenos centrais, em vez de empoçar. A derivada calculava exatamente quão rápido a água escoaria.
+                            </p>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- Aba: Integrais -->
                 <div id="integrais-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Integrais: O Volume do Coliseu</h2>
+                    
+                    <!-- Elemento Visual Adicionado -->
+                    <img src="https://placehold.co/800x300/334155/E0E7FF?text=Área+sob+a+Curva+(Integral)" alt="Gráfico de integrais" class="w-full h-auto rounded-lg shadow-md mb-8">
+
                     <p class="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
-                        (Aqui você pode adicionar o conteúdo sobre Integrais.)
+                        A integral é usada para calcular a soma acumulada, como a área sob uma curva ou o volume de um objeto. Para construir algo na escala do Coliseu, o cálculo de volumes era essencial.
                     </p>
-                    <p class="text-gray-400 italic text-base leading-relaxed">
-                        <strong>Exemplo de Tópico:</strong> Podemos usar integrais (como sólidos de revolução ou integração tripla) para estimar o volume total de materiais (concreto, travertino) necessários para construir o Coliseu. Ou ainda, calcular a área total da arena ou a área de superfície do velário (o toldo retrátil).
-                    </p>
+
+                    <!-- Seções Expansíveis Adicionadas -->
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            🧱 Volume de Materiais (Integração Tripla)
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                Quanto concreto e pedra de travertino foram necessários? Os romanos não podiam simplesmente multiplicar comprimento x largura x altura.
+                                <br><br>
+                                Eles precisavam calcular o volume de formas curvas complexas (a elipse e as arquibancadas). Isso é um problema de integral. Usando integrais (como "sólidos de revolução" ou integração tripla), podemos somar fatias infinitesimais da estrutura para encontrar o volume total de material necessário.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800 border border-gray-700 rounded-lg p-1 mb-4">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-100 p-4 hover:bg-slate-700 rounded-md transition-colors duration-200">
+                            🌊 Volume de Água para Batalhas Navais
+                        </summary>
+                        <div class="p-4 border-t border-gray-600">
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                                Para inundar a arena para as *naumachiae* (batalhas navais), era preciso saber quanta água era necessária. A arena era uma elipse plana (área = <code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">π * a * b</code>).
+                                <br><br>
+                                O volume de água (V) era a integral da área da base (A) pela altura (h) da água:
+                                <br><code class="text-yellow-400 bg-gray-700 px-2 py-1 rounded">V = ∫ A dh</code>
+                                <br>
+                                Isso permitia calcular o tempo necessário para encher a arena usando os aquedutos.
+                            </p>
+                        </div>
+                    </details>
                 </div>
 
                 <!-- Aba: Calculadora -->
                 <div id="calculadora-content" class="tab-content">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-6">Calculadora de Cálculo</h2>
                     
-                    <div class="space-y-4">
+                    <div class="space-y-4 max-w-md mx-auto">
+                        <!-- Visor (Input Field) -->
                         <div>
-                            <label for="calc-input" class="block text-sm font-medium text-gray-300 mb-2">Expressão (use a sintaxe do Nerdamer):</label>
-                            <input type="text" id="calc-input" class="w-full p-3 bg-gray-700 border border-gray-600 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Ex: diff(x^2, x) ou solve(x^2=4, x)">
-                            <p class="text-xs text-gray-400 mt-1">Exemplos: <code>diff(x^3, x)</code>, <code>integrate(2*x, x)</code>, <code>solve(x^2-1=0, x)</code></p>
+                            <label for="calc-input" class="block text-sm font-medium text-gray-300 mb-2">Expressão:</label>
+                            <input type="text" id="calc-input" class="w-full p-3 bg-gray-800 border border-gray-600 text-gray-100 rounded-lg focus:ring-2 focus:ring-slate-500 focus:outline-none text-right text-2xl" placeholder="0">
+                            <p class="text-xs text-gray-400 mt-1">Use os botões ou digite. Ex: <code>diff(x^3, x)</code></p>
                         </div>
 
-                        <div class="flex flex-wrap gap-4">
-                            <button id="calc-solve" class="bg-slate-600 hover:bg-slate-700 text-white font-medium py-2 px-5 rounded-full shadow-md transition-all duration-300">
-                                Calcular / Simplificar
-                            </button>
-                            <button id="calc-clear" class="bg-gray-600 hover:bg-slate-700 text-white font-medium py-2 px-5 rounded-full shadow-md transition-all duration-300">
-                                Limpar
-                            </button>
+                        <!-- Teclado da Calculadora -->
+                        <div id="calc-keypad" class="grid grid-cols-5 gap-2 mt-4">
+                            <!-- Linha 1 -->
+                            <button class="calc-btn calc-btn-op" data-value="diff(">diff(</button>
+                            <button class="calc-btn calc-btn-op" data-value="integrate(">int(</button>
+                            <button class="calc-btn calc-btn-op" data-value="solve(">solve(</button>
+                            <button class="calc-btn calc-btn-op" data-value="^">^</button>
+                            <button id="calc-clear" class="calc-btn calc-btn-action">C</button>
+                            
+                            <!-- Linha 2 -->
+                            <button class="calc-btn calc-btn-op" data-value="sin(">sin(</button>
+                            <button class="calc-btn calc-btn-op" data-value="cos(">cos(</button>
+                            <button class="calc-btn calc-btn-op" data-value="tan(">tan(</button>
+                            <button class="calc-btn calc-btn-op" data-value="(">(</button>
+                            <button class="calc-btn calc-btn-op" data-value=")">)</button>
+
+                            <!-- Linha 3 -->
+                            <button class="calc-btn calc-btn-num" data-value="7">7</button>
+                            <button class="calc-btn calc-btn-num" data-value="8">8</button>
+                            <button class="calc-btn calc-btn-num" data-value="9">9</button>
+                            <button class="calc-btn calc-btn-op" data-value="/">/</button>
+                            <button id="calc-backspace" class="calc-btn calc-btn-action">←</button>
+                            
+                            <!-- Linha 4 -->
+                            <button class="calc-btn calc-btn-num" data-value="4">4</button>
+                            <button class="calc-btn calc-btn-num" data-value="5">5</button>
+                            <button class="calc-btn calc-btn-num" data-value="6">6</button>
+                            <button class="calc-btn calc-btn-op" data-value="*">*</button>
+                            <button class="calc-btn calc-btn-num" data-value="x">x</button>
+
+                            <!-- Linha 5 -->
+                            <button class="calc-btn calc-btn-num" data-value="1">1</button>
+                            <button class="calc-btn calc-btn-num" data-value="2">2</button>
+                            <button class="calc-btn calc-btn-num" data-value="3">3</button>
+                            <button class="calc-btn calc-btn-op" data-value="-">-</button>
+                            <button id="calc-solve" class="calc-btn calc-btn-eq" data-value="=">=</button>
+
+                            <!-- Linha 6 -->
+                            <button class="calc-btn calc-btn-num col-span-2" data-value="0">0</button>
+                            <button class="calc-btn calc-btn-num" data-value=".">.</button>
+                            <button class="calc-btn calc-btn-op" data-value="+">+</button>
+                            <button class="calc-btn calc-btn-op" data-value=",">,</button>
                         </div>
 
+                        <!-- Resultado -->
                         <div>
                             <h3 class="text-lg font-semibold text-gray-100 mt-6 mb-2">Resultado:</h3>
                             <pre id="calc-result" class="bg-gray-800 p-4 rounded-lg text-lg text-green-400 border border-gray-700 min-h-[50px] overflow-x-auto"></pre>
@@ -376,6 +546,9 @@
             const calcSolveBtn = document.getElementById('calc-solve');
             const calcClearBtn = document.getElementById('calc-clear');
             const calcResult = document.getElementById('calc-result');
+            // Novos botões
+            const calcBackspaceBtn = document.getElementById('calc-backspace');
+            const calcKeypadBtns = document.querySelectorAll('#calc-keypad button[data-value]');
 
             if (calcSolveBtn) {
                 calcSolveBtn.addEventListener('click', () => {
@@ -406,6 +579,29 @@
                     calcInput.value = '';
                     calcResult.textContent = '';
                     calcResult.classList.remove('text-red-400', 'text-green-400');
+                });
+            }
+
+            // --- NOVOS EVENT LISTENERS DA CALCULADORA ---
+            if (calcBackspaceBtn) {
+                calcBackspaceBtn.addEventListener('click', () => {
+                    calcInput.value = calcInput.value.slice(0, -1);
+                });
+            }
+
+            if (calcKeypadBtns) {
+                calcKeypadBtns.forEach(btn => {
+                    // Impede que o botão "=" (que também tem data-value) adicione um "=" ao input
+                    if (btn.id !== 'calc-solve') {
+                        btn.addEventListener('click', () => {
+                            // Se o visor for "0", substitui em vez de adicionar
+                            if (calcInput.value === '0') {
+                                calcInput.value = btn.dataset.value;
+                            } else {
+                                calcInput.value += btn.dataset.value;
+                            }
+                        });
+                    }
                 });
             }
 
@@ -542,5 +738,7 @@
 
 </body>
 </html>
+
+
 
 
