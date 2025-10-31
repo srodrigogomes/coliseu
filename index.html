@@ -40,9 +40,25 @@
 <body class="bg-gray-900 min-h-screen p-4 md:p-8 flex items-center justify-center">
 
     <div class="container max-w-5xl mx-auto">
-        <h1 class="text-3xl md:text-5xl font-bold text-center text-gray-100 mb-8" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
-            O Coliseu e o Cálculo
-        </h1>
+        <div class="flex justify-center items-center gap-4 mb-8">
+            <!-- Ícone de Coluna Romana -->
+            <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1z"/>
+                <path d="M3 4.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-7zM4 5v6h1V5H4zm2 0v6h1V5H6zm2 0v6h1V5H8zm2 0v6h1V5h-1zm2 0v6h1V5h-1z"/>
+                <path d="M2 13.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1z"/>
+            </svg>
+            
+            <h1 class="text-3xl md:text-5xl font-bold text-center text-gray-100 font-serif" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                O Coliseu e o Cálculo
+            </h1>
+
+            <!-- Ícone de Coluna Romana (outro lado) -->
+            <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1z"/>
+                <path d="M3 4.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-7zM4 5v6h1V5H4zm2 0v6h1V5H6zm2 0v6h1V5H8zm2 0v6h1V5h-1zm2 0v6h1V5h-1z"/>
+                <path d="M2 13.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1z"/>
+            </svg>
+        </div>
 
         <!-- Card principal da apresentação -->
         <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
@@ -80,11 +96,17 @@
                     </p>
                     <!-- Botões Interativos -->
                     <div class="flex flex-wrap gap-4">
-                        <button id="img-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300">
+                        <button id="img-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2">
+                            <span role="img" aria-label="Imagens">🖼️</span>
                             Ver Imagens
                         </button>
-                        <button id="vid-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300">
-                            Curiosidades e Vídeos
+                        <button id="vid-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2">
+                            <span role="img" aria-label="Vídeos">🎥</span>
+                            Vídeos
+                        </button>
+                        <button id="cur-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2">
+                            <span role="img" aria-label="Curiosidades">💡</span>
+                            Curiosidades
                         </button>
                     </div>
                 </div>
@@ -166,6 +188,7 @@
             // Botões de Gatilho do Modal
             const imgBtn = document.getElementById('img-btn');
             const vidBtn = document.getElementById('vid-btn');
+            const curBtn = document.getElementById('cur-btn'); // Botão de curiosidades
 
             // --- LÓGICA DAS ABAS ---
 
@@ -254,16 +277,33 @@
                                 Vídeo: O Velário (O toldo retrátil) (Link Externo)
                             </a>
                         </li>
+                    </ul>
+                `;
+                openModal('Vídeos sobre o Coliseu', videoContent);
+            });
+
+            // Conteúdo para o botão "Curiosidades"
+            curBtn.addEventListener('click', () => {
+                const curiosidadesContent = `
+                    <ul class="list-disc list-inside space-y-4 text-lg">
                         <li>
-                            <strong class="text-gray-100">Curiosidade:</strong> O Coliseu tinha 80 entradas, permitindo que os 50.000 espectadores saíssem em questão de minutos. A logística de fluxo de multidão (um conceito relacionado ao cálculo) era incrivelmente avançada.
+                            <strong class="text-gray-100">Evacuação Rápida:</strong> O Coliseu tinha 80 entradas e saídas, chamadas *vomitoria*. Elas eram tão eficientes que os 50.000 espectadores podiam evacuar o prédio em questão de minutos.
+                        </li>
+                        <li>
+                            <strong class="text-gray-100">Batalhas Navais:</strong> Nos primeiros anos, a arena do Coliseu podia ser inundada para realizar *naumachiae* (batalhas navais simuladas) antes da construção do hipogeu (o complexo subterrâneo).
+                        </li>
+                        <li>
+                            <strong class="text-gray-100">O Toldo Retrátil:</strong> O Coliseu possuía um *velário*, um enorme toldo retrátil operado por marinheiros romanos, para proteger os espectadores do sol e da chuva.
                         </li>
                     </ul>
                 `;
-                openModal('Curiosidades e Vídeos', videoContent);
+                openModal('Curiosidades do Coliseu', curiosidadesContent);
             });
         });
     </script>
 
 </body>
 </html>
+
+
 
