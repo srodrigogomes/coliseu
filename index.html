@@ -303,175 +303,162 @@
         }
 
 
-        /* --- Estilos do Mapa Mental (NOVO) --- */
+        /* --- Estilos do Mapa Mental (LÓGICA CORRIGIDA) --- */
         .mindmap-wrapper {
-            margin-top: 2rem; /* mt-8 */
-            padding: 1.5rem; /* p-6 */
-            background-color: #111827; /* bg-gray-900 (um pouco mais escuro que o card) */
-            border-radius: 0.75rem; /* rounded-lg */
-            border: 1px solid #4B5563; /* border-gray-600 */
-            overflow-x: auto; /* Permite rolagem horizontal se for muito largo */
+            margin-top: 2rem; padding: 1.5rem; background-color: #111827;
+            border-radius: 0.75rem; border: 1px solid #4B5563;
+            overflow-x: auto; text-align: center;
         }
-
         .mindmap-wrapper h3 {
-            font-size: 1.5em; /* 2xl */
-            font-weight: 700; /* bold */
-            color: #F9FAFB; /* text-gray-50 */
-            margin-bottom: 2rem; /* mb-8 */
-            text-align: center;
+            font-size: 1.5em; font-weight: 700; color: #F9FAFB;
+            margin-bottom: 2rem; text-align: center;
         }
-
         .mindmap {
-            display: flex;
-            justify-content: center;
-            position: relative;
-            padding: 20px 0;
-            min-width: 800px; /* Garante espaço para o mapa horizontal */
+            display: inline-block; position: relative;
+            padding: 20px 0; min-width: 800px;
         }
-
         .mindmap ul {
-            position: relative;
-            padding-top: 40px; /* Espaço para a linha do pai */
-            display: flex;
-            justify-content: center;
+            position: relative; padding-top: 40px; /* Espaço para linha */
+            display: flex; justify-content: center;
+            margin: 0; list-style: none;
+        }
+        /* Ajuste para o UL nível 2 (netos) */
+        .mindmap > li > ul > li > ul {
+            padding-top: 30px;
         }
 
         .mindmap li {
-            position: relative;
-            padding: 12px 18px;
-            margin: 0 10px;
-            text-align: center;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: default;
-            min-width: 130px;
-            list-style: none;
-            animation: fadeInNode 0.5s ease-in-out forwards;
-            opacity: 0;
+            position: relative; padding: 12px 18px; margin: 0 10px;
+            text-align: center; border-radius: 8px; color: white;
+            font-weight: 600; transition: all 0.3s ease; cursor: default;
+            min-width: 130px; list-style: none;
+            animation: fadeInNode 0.5s ease-in-out forwards; opacity: 0;
             border: 1px solid #4B5563;
         }
-
         .mindmap li:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
-        /* Nó Central */
-        .mindmap > li {
-            background-color: #FBBF24; /* bg-yellow-400 */
-            color: #1F2937; /* text-gray-800 */
-            font-size: 1.1em;
-            border-color: #FBBF24;
+        /* Cores */
+        .mindmap > li { background-color: #FBBF24; color: #1F2937; border-color: #FBBF24; }
+        .mindmap > li > ul > li { background-color: #3B82F6; border-color: #3B82F6; animation-delay: 0.2s; }
+        .mindmap > li > ul > li > ul > li { 
+            background-color: #10B981; border-color: #10B981; animation-delay: 0.4s;
+            font-size: 0.9em; font-weight: 500; min-width: 100px; padding: 8px;
         }
 
-        /* Nós Filhos (Nível 1) */
-        .mindmap > li > ul > li {
-            background-color: #3B82F6; /* bg-blue-500 */
-            animation-delay: 0.2s;
-            border-color: #3B82F6;
-        }
+        /* --- LINHAS (LÓGICA SIMPLES E CORRIGIDA) --- */
 
-        /* Nós Netos (Nível 2) */
-        .mindmap > li > ul > li > ul {
-            padding-top: 30px; /* Menor espaço */
-        }
-        
-        .mindmap > li > ul > li > ul > li {
-            background-color: #10B981; /* bg-green-500 */
-            font-size: 0.9em;
-            font-weight: 500;
-            min-width: 100px;
-            padding: 8px;
-            animation-delay: 0.4s;
-            border-color: #10B981;
-        }
-
-        /* Linhas */
-        .mindmap li::before, .mindmap li::after {
+        /* 1. Linha vertical PARA CIMA (de cada 'li' para sua linha horizontal) */
+        .mindmap li::before {
             content: '';
             position: absolute;
-            left: 50%;
-            border-color: #4B5563; /* border-gray-600 */
             z-index: -1;
-        }
-
-        /* Linha para cima (conectando ao pai) */
-        .mindmap li::before {
+            left: 50%;
             top: 0;
-            height: 40px; /* Distância do pai */
+            transform: translateY(-100%); /* Sobe o tamanho da linha */
+            height: 40px; /* = padding-top do ul */
             border-left: 2px solid #4B5563;
-            transform: translateY(-40px);
         }
-        
         .mindmap > li > ul > li > ul > li::before {
-             height: 30px; /* Distância menor para netos */
-             transform: translateY(-30px);
+            height: 30px; /* = padding-top do ul nível 2 */
         }
 
-        /* Linha horizontal (conectando irmãos) */
+        /* 2. Linha horizontal (conecta irmãos) */
         .mindmap li::after {
-            top: -40px; /* Posição da linha horizontal */
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: -40px; /* = negativo do padding-top do ul */
             width: 100%;
             border-top: 2px solid #4B5563;
-            transform: translateX(-50%);
         }
-        
         .mindmap > li > ul > li > ul > li::after {
-            top: -30px; /* Posição da linha horizontal menor */
+            top: -30px; /* = negativo do padding-top do ul nível 2 */
         }
 
-        /* Ajustes para o nó raiz (não ter linha para cima) */
+        /* 3. Linha vertical PARA BAIXO (do 'li' PAI para o 'ul' FILHO) */
+        /* Esta é a linha que faltava */
+        .mindmap li > ul::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 50%;
+            top: 0; /* Começa no topo do UL */
+            transform: translateX(-50%); /* Centraliza */
+            height: 40px; /* = padding-top do UL */
+            border-left: 2px solid #4B5563;
+        }
+        .mindmap > li > ul > li > ul::before {
+            height: 30px; /* = padding-top do UL nível 2 */
+        }
+
+
+        /* --- Escondendo linhas desnecessárias --- */
+        /* 1. Nó RAIZ (não tem linhas para cima/lados) */
         .mindmap > li::before, .mindmap > li::after {
             display: none;
         }
-
-        /* Ajustes para a primeira/última criança (não ter linha lateral inteira) */
-        .mindmap li:first-child::after {
-            left: 50%;
-            width: 50%;
-        }
-        .mindmap li:last-child::after {
-            left: 0;
-            width: 50%;
-        }
-        /* Se for filho único, não precisa de linha horizontal */
-        .mindmap li:only-child::after {
+        /* 2. Ajuste das linhas horizontais (primeiro/último/único) */
+        .mindmap li:first-child::after { left: 50%; width: 50%; }
+        .mindmap li:last-child::after { left: 0; width: 50%; }
+        .mindmap li:only-child::after { display: none; }
+        
+        /* 3. O ul (nível 1) não precisa da linha para cima (ul::before) pois se conecta à raiz */
+        .mindmap > li > ul::before {
             display: none;
         }
 
-        /* Animação de entrada */
+
+        /* Animação */
         @keyframes fadeInNode {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Ajustes para mobile: empilhar */
+        /* Mobile */
         @media (max-width: 768px) {
             .mindmap {
-                min-width: 0; /* Remove a largura mínima */
+                min-width: 0;
                 flex-direction: column;
                 align-items: center;
+                display: block; /* (AJUSTE) */
             }
             .mindmap ul {
                 flex-direction: column;
                 align-items: center;
                 padding-top: 20px;
+                position: static; /* (AJUSTE) */
+                transform: none; /* (AJUSTE) */
+                left: auto;
             }
             .mindmap li {
                 margin: 10px 0;
                 width: 80%;
+                display: block; /* (AJUSTE) */
             }
-            .mindmap li::before {
-                transform: translateY(-20px);
-                height: 20px;
-            }
-            /* Desativa linhas horizontais em mobile */
+            
+            /* (AJUSTE) Lógica de linhas no mobile */
+            .mindmap li > ul::before, /* Desliga a linha 'para baixo' do pai */
             .mindmap li::after,
             .mindmap li:first-child::after, 
             .mindmap li:last-child::after {
                 display: none;
+            }
+            
+            /* Mantém a linha 'para cima' do li, mas mais curta */
+             .mindmap li::before {
+                display: block;
+                transform: translateY(-100%);
+                height: 20px; /* = padding-top do ul mobile */
+             }
+             /* Esconde a linha 'para cima' da raiz (Nível 1) */
+             .mindmap > li::before { display: none; } /* Raiz continua sem linha */
+            
+            /* Ajuste do padding-top dos ULs em mobile */
+            .mindmap ul, .mindmap > li > ul > li > ul {
+                padding-top: 20px;
             }
         }
         /* --- Fim dos Estilos do Mapa Mental --- */
